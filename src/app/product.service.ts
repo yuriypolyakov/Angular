@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 
-//import { Item } from './item.model';
+import { Product } from './product.model';
 
 @Injectable()
 export class ProductService {
 
   constructor() { }
 
-  /*getItem(): Item {
-    return new Item(1, 'Create', 1, 8, 0, false);
-  }
-
-  getItems(): Array<Item> {
+  
+  getProducts(): Array<Product> {
     return [
-      new Item(1, 'Estimate', 1, 8, 8, true),
-      new Item(2, 'Create', 2, 8, 4, false),
-      new Item(3, 'Deploy', 3, 8, 0, false)
+      new Product(1, 'Product1'),
+      new Product(2, 'Product2'),
+      new Product(3, 'Product3')
     ];
-  }*/
+  }
 
 }

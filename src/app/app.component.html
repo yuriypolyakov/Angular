@@ -23,6 +23,26 @@
     <div *ngIf="!isBasketEmpty">
       <h3>Basket!</h3>
     </div>
+
+<div>
+  <div>Products</div>
+  <div>
+    <ul>
+      <li *ngFor="let it of products">
+        <ul>
+          <li>id: {{it.id}}</li>
+          <li>name: {{it.name}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<div>
+  <div>Products</div>
+  <div>
+    <app-cart></app-cart>
+    </div>    
+</div>        
 <!--<h2>Here are some links to help you start: </h2>
 <ul>
   <li>

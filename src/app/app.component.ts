@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductService } from './product.service';
+import { Product } from './product.model';
+import { CartComponent } from './cart/cart.component';
+
  enum Category {
     /// Skip this frame when printing out stack
     blackList,
@@ -21,6 +25,11 @@ export class AppComponent  implements OnInit {
 	isAvailable: boolean;
   items: Array<string>;
   isBasketEmpty : boolean;
+  products: Array<Product>;
+
+  constructor(
+      private productService: ProductService
+    ) {}
 
 ngOnInit() {
     this.name = "my name";
@@ -30,6 +39,7 @@ ngOnInit() {
     this.isAvailable = true;
     this.items = ["1","2","3"];
     this.isBasketEmpty = true;
+    this.products = this.productService.getProducts();
   }
 
    onBuy(): void {
