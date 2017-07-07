@@ -47,4 +47,10 @@ ngOnInit() {
      //this.name = "my name2";
      this.isBasketEmpty = false;
        };
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.productService.create(name);
+  };
 }

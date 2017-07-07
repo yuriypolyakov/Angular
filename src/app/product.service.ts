@@ -5,15 +5,25 @@ import { Product } from './product.model';
 @Injectable()
 export class ProductService {
 
-  constructor() { }
+  idx : number;
+  products : Array<Product> ;
+
+  constructor() {
+    this.idx=1;
+    
+    this.products =[
+      new Product( this.idx++, 'Product1'),
+      new Product(this.idx++, 'Product2'),
+      new Product(this.idx++, 'Product3')
+    ];
+   }
 
   
   getProducts(): Array<Product> {
-    return [
-      new Product(1, 'Product1'),
-      new Product(2, 'Product2'),
-      new Product(3, 'Product3')
-    ];
+    return this.products;
   }
 
+create(name: string) {
+	  this.products.push(new Product(this.idx++,name));
+	}
 }
