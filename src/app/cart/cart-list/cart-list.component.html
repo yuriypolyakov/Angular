@@ -1,0 +1,13 @@
+<div>
+  <div>Cart items</div>
+  <div>
+       <app-cart-item 
+        *ngFor="let it of items" 
+        [CartItem]="it"
+        (update)="onUpdateItem(it)"
+        (delete)="onDeleteItem(it.id)"
+       ></app-cart-item>
+  </div>
+  <div>Total items: {{info.total}}</div> 
+<div>Cart summary:</div> 
+</div>

@@ -1,0 +1,7 @@
+<div>id: {{CartItem.id}}</div>
+<div>name: {{CartItem.name}}</div>
+<div>price: {{CartItem.price}}</div>
+<div>quantity: <input value="{{CartItem.quantity}}" placeholder="quantity" #quantity/></div>
+
+<div><button (click)='updateQuantity({"quantity": quantity.value}); $event.stopPropagation()'>Update quantity</button></div>
+<div><button (click)='deleteItem(CartItem.id); $event.stopPropagation()'>Delete</button></div>
