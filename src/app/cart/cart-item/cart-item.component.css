@@ -1,0 +1,41 @@
+:host.task {
+    color: blue;
+}
+
+:host.red {
+    color: red;
+}
+
+.clearance {
+  color: red;
+  background: yellow;
+  border-top: 2px solid orange;
+}
+
+.clearance:after {
+  content: " on clearance!";
+  font-weight: bold;
+  font-style: italic;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+.bold {
+    font-weight: bold;
+}
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+.has-error {
+    color: red;
+    background-color: yellow;
+}
+.orange {
+    color: orange;
+}
+

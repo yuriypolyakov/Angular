@@ -1,13 +1,13 @@
 <div>
-  <div>Cart items</div>
-  <div>
-       <app-cart-item 
+  <div>Cart items <label #label></label></div>
+  <div ng-model="summaryClass">
+       <app-cart-item #child
         *ngFor="let it of items" 
         [CartItem]="it"
         (update)="onUpdateItem(it)"
         (delete)="onDeleteItem(it.id)"
        ></app-cart-item>
   </div>
-  <div>Total items: {{info.total}}</div> 
-<div>Cart summary:</div> 
+  <div ng-class="summaryClass">Total items: {{info.total}}</div> 
+  <div>Cart summary: {{info.totalSum}}</div> 
 </div>

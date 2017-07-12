@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit,EventEmitter, Input, Output, ViewChild,ElementRef } from '@angular/core';
 import { CartItem,ICartItem } from 'app/cart/models/cart.item.model';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CartService,Info } from '../cart.service';
@@ -9,17 +9,25 @@ import { CartService,Info } from '../cart.service';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit {
- //@Input() items: Array<ICartItem>;
-   items: Array<ICartItem>;
+
+  @ViewChild('label') labelField: ElementRef;
+  @ViewChild(CartItemComponent) child: CartItemComponent;
+  @ViewChild('child') childComp: ElementRef;
+  
+  ngAfterViewInit() {
+    (<HTMLLabelElement>this.labelField.nativeElement).textContent = 'loaded';
+    //this.child.onClick();
+
+    console.log(this.childComp);
+  }
+
+  items: Array<ICartItem>;
   info: Info;
 
  @Output() update: EventEmitter<ICartItem>;
    constructor(private cartService: CartService) { 
     this.info = cartService.info;
     console.log('CartListComponent, constructor, this.info.total='+this.info.total);
-    /*this._subscription = cartService.nameChange.subscribe((value) => { 
-      this.name = value; 
-    });*/
    }
 
   ngOnInit() {
@@ -37,13 +45,8 @@ export class CartListComponent implements OnInit {
 
 onDeleteItem(id: number): void {
     console.log('CartListComponent::onDeleteItem, item', id);
-    //this.update.emit(item);
-     var found = this.items.find(c => c.id==id);
-  if (found!=null)
-  {
-    console.log('Delete!');
-    var index = this.items.indexOf(found);
-      this.items.splice(index, 1);    
-  }
+    
+    this.cartService.delete(id);
+    
   }
 }

@@ -1,69 +1,80 @@
 import { Injectable } from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
-
 import { ICartItem,CartItem } from 'app/cart/models/cart.item.model';
 
 export interface Info {
    total:number;
+   totalSum:number;
 }
 
 @Injectable()
 export class CartService {
 
-  idx : number;
-  cartItems : Array<ICartItem> ;
-  nameChange: Subject<string> = new Subject<string>();
+    idx : number;
+    cartItems : Array<ICartItem> ;
 
-    info: Info = { total : 5 };;
+    info: Info = { total : 0, totalSum :0 };
 
-  constructor() {
-    this.idx=1;
-    
-    this.cartItems =[
-      new CartItem( this.idx++, 'cart item 1',1),
-      new CartItem(this.idx++, 'cart item 2',2),
-      new CartItem(this.idx++, 'cart item 3',4)
-    ];
+    constructor() {
+        this.idx=1;
+        
+        this.cartItems =[
+        new CartItem( this.idx++, 'cart item 1',1,10,false),
+        new CartItem(this.idx++, 'cart item 2',2,20,true),
+        new CartItem(this.idx++, 'cart item 3',4,30,true)
+        ];
 
-    this.info = {total : this.countItemsQuantityInCart()};
-   }
+        this.updateTotals();
+    }
 
-  
-  getCartItems(): Array<ICartItem> {
-    return this.cartItems;
-  }
+    getCartItems(): Array<ICartItem> {
+        return this.cartItems;
+    }
 
-create(name: string,quantity:number) {
+    create(name: string,quantity:number) {
 	  this.cartItems.push(new CartItem(this.idx++,name,quantity));
 	}
 
     update(item: ICartItem): void {
-   console.log('CartService, update method:', item);
-  var found = this.cartItems.find(c => c.id==item.id);
-  if (found!=null)
-  {
-    found.quantity = item.quantity;
-    //this.nameChange.next(found.name);
-    this.info.total = this.countItemsQuantityInCart();
-  }
-}
+        console.log('CartService, update method:', item);
+        var found = this.cartItems.find(c => c.id==item.id);
+        if (found!=null)
+        {
+            found.quantity = item.quantity;
+            this.updateTotals();
+            
+        }
+    }
 
- countCartSum() : number{
-      var sum:number=0;
-    this.cartItems.forEach(function(item) {
-        //console.log('item.quantity='+item.quantity);
-      sum+=item.quantity*item.price;
-  
-     }) ;
-  return sum;
- }   
+    delete(id: number): void {
+        console.log('CartService, delete method:', id);
+        var found = this.cartItems.find(c => c.id==id);
+        if (found!=null)
+        {
+            console.log('Delete!');
+            var index = this.cartItems.indexOf(found);
+            this.cartItems.splice(index, 1);    
+            this.updateTotals();
+        }
+    }
 
- countItemsQuantityInCart() : number{
+    private countCartSum(){
+        this.info.totalSum=0;
+        this.cartItems.forEach(
+            s => this.info.totalSum += s.quantity*s.price
+        ) ;
+    }   
 
-    this.info.total = 0;
-    this.cartItems.forEach(
-        s => this.info.total += s.quantity
-     ) ;
-  return this.info.total;
-}
+    private countItemsQuantityInCart(){
+        this.info.total = 0;
+        this.cartItems.forEach(
+            s => this.info.total += s.quantity
+        ) ;
+    }
+
+    private updateTotals()
+    {
+        this.countItemsQuantityInCart();
+        this.countCartSum();
+    }
+
 }

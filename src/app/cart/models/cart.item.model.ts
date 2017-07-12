@@ -5,7 +5,7 @@ export interface ICartItem{
     price : number;
     shipped?: boolean;
     paid?: boolean;
-
+    onClearance : boolean;
 }
 
 
@@ -15,10 +15,13 @@ export class CartItem implements ICartItem{
     public id: number,
     public name: string,
     public quantity: number,
-    public price: number=0
+    public price: number=0,
+    public onClearance: boolean=false,
   ) {
     this.id = id;
     this.name = name;
     this.quantity = quantity;
+    this.price = price;
+    this.onClearance =onClearance;
   }
 }
