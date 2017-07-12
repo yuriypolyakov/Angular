@@ -28,24 +28,15 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.items = this.cartService.getCartItems();
-    this.totalQuantity = this.cartService.countItemsQuantityInCart();
+    //this.totalQuantity = this.cartService.countItemsQuantityInCart();
   }
 
   ngOnChanges()
   {
     console.log('CartComponent, ngOnChanges');
-    this.totalQuantity = this.cartService.countItemsQuantityInCart();
+    //this.totalQuantity = this.cartService.countItemsQuantityInCart();
   }
-  getTotalQuantity() : number
-  {
-    return this.cartService.countItemsQuantityInCart();
-  }
-
-  getCartSummary() : number
-  {
-    return this.cartService.countCartSum();
-  }
-
+  
  update(item: ICartItem): void {
    console.log('CartComponent, update method:', item);
   this.cartService.update(item);
