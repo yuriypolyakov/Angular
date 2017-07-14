@@ -1,0 +1,17 @@
+<p>1. Создайте сервис, который позволит работать с localStorage (как класс). Он должен предоставлять методы для:
+	- установки значения (setItem)
+	- получения значения (getItem)
+	- удаления значения (removeItem)
+2. Создайте сервис, который будет хранить объект настроек, который  приходит ему на вход, например login, id, email.
+  storage
+   <ul *ngFor="let it of items">
+      <li>id: {{it.id}}, name: {{it.name}}
+      </li>
+    </ul>
+    <div>
+  <label>add product:</label> <input #productName />
+  <button (click)="add(productName.value); productName.value=''">
+    Add
+  </button>
+</div>   
+

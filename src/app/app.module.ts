@@ -6,20 +6,32 @@ import { AppComponent } from './app.component';
 import { ProductService } from './product.service';
 import { ProductComponent } from './product/product.component';
 import { OrdersComponent } from './orders/orders.component';
-//import { CartItemComponent } from './cart/cart-item/cart-item.component';
-//import { CartListComponent } from './cart-list/cart-list.component';
+import { LocalStorageService } from './local-storage.service';
+import { StorageComponent } from './storage/storage.component';
+import { AppConstsService } from './app-settings/app-consts.service';
+import { AppSettingsComponent } from './app-settings/app-settings.component';
+import { RandomStringComponent } from './random-string/random-string.component';
+import { ClickDirective } from './directives/click.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    OrdersComponent
+    OrdersComponent,
+    StorageComponent,
+    AppSettingsComponent,
+    RandomStringComponent,
+    ClickDirective
   ],
   imports: [
     BrowserModule,
     CartModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,
+    LocalStorageService,
+    AppConstsService
+    ],
   bootstrap: [AppComponent]
-})
+}) 
+
 export class AppModule { }
