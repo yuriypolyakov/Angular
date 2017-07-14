@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProductService } from './product.service';
-import { Product } from './product.model';
+import { ProductService } from './product/product.service';
+import { Product } from './product/models/product.model';
 import { CartComponent } from './cart/cart.component';
 
  enum Category {

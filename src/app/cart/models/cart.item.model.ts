@@ -17,11 +17,5 @@ export class CartItem implements ICartItem{
     public quantity: number,
     public price: number=0,
     public onClearance: boolean=false,
-  ) {
-    this.id = id;
-    this.name = name;
-    this.quantity = quantity;
-    this.price = price;
-    this.onClearance =onClearance;
-  }
+  ) { }
 }
