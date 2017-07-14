@@ -1,6 +1,6 @@
 import { Component, OnInit,AfterContentInit,OnChanges } from '@angular/core';
 import { CartListComponent } from './cart-list/cart-list.component';
-import { ICartItem, CartItem } from "app/cart/models/cart.item.model";
+import { ICartItem, CartItem } from './models/cart.item.model';
 import { CartService,Info } from './cart.service';
 
 @Component({

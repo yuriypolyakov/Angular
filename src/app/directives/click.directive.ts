@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
   selector: '[appClick]'
 })
 export class ClickDirective {
-  @Input('appClick') color: string;
+  @Input('appClick') size: string;
   private el: HTMLElement;
 
   constructor(el: ElementRef) {
@@ -12,18 +12,10 @@ export class ClickDirective {
   }
 
   @HostListener('click') onClick() {
-    this.highlight(this.color || 'lightgreen');
-
+    this.highlight(this.size);
   }
-
-  @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(this.color || 'lightgreen');
-
-  }
-  @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(null);
-  }
-  private highlight(color: string) {
-    this.el.style.backgroundColor = color;
+  
+  private highlight(size: string) {
+    this.el.style.fontSize=size;
   }
 }

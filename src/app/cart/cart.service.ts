@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICartItem,CartItem } from 'app/cart/models/cart.item.model';
+import { ICartItem,CartItem } from './models/cart.item.model';
 
 export interface Info {
    total:number;

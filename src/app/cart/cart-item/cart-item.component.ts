@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, ViewChild,ElementRef } from '@angular/core';
-import { ICartItem } from "app/cart/models/cart.item.model";
+import { ICartItem } from "../models/cart.item.model";
 
 @Component({
   selector: 'app-cart-item',
@@ -39,7 +39,7 @@ export class CartItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void { 
     console.log('On Destroy Hook');
   }
 
@@ -54,4 +54,4 @@ export class CartItemComponent implements OnInit {
     console.log('CartItemComponent, deleteItem method:', this.CartItem);
       this.delete.emit(this.CartItem.id);
   }
-}
+} 

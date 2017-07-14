@@ -5,7 +5,5 @@ export class Product {
     public name: string
     
   ) {
-    this.id = id;
-    this.name = name;
   }
 }
