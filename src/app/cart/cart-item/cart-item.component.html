@@ -1,7 +1,7 @@
 <div #topelement> 
 <div>id: {{CartItem.id}}</div>
 <div>name: {{CartItem.name}}</div>
-<div [ngClass]="{clearance : CartItem.onClearance} ">price: {{CartItem.price}}</div>
+<div [ngClass]="{clearance : CartItem.onClearance} ">price: {{CartItem.price | currency:'EUR':true:'2.1-1'}} <span style="color:green">Currency formatted with pipe</span></div>
 <div>quantity: <input value="{{CartItem.quantity}}" placeholder="quantity" #quantity/></div>
 </div>
 

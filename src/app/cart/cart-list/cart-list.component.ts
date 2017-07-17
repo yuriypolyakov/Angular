@@ -2,18 +2,21 @@ import { Component, OnInit,EventEmitter, Input, Output, ViewChild,ElementRef } f
 import { CartItem,ICartItem } from '../models/cart.item.model';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CartService,Info } from '../cart.service';
+import { ClearancePipe } from './../pipes/clearance.pipe';
 
 @Component({
   selector: 'app-cart-list',
   templateUrl: './cart-list.component.html',
-  styleUrls: ['./cart-list.component.css']
+  styleUrls: ['./cart-list.component.css'],
+  providers: [ClearancePipe]
 })
 export class CartListComponent implements OnInit {
 
   @ViewChild('label') labelField: ElementRef;
   @ViewChild(CartItemComponent) child: CartItemComponent;
   @ViewChild('child') childComp: ElementRef;
-  
+
+
   ngAfterViewInit() {
     (<HTMLLabelElement>this.labelField.nativeElement).textContent = 'loaded';
     //this.child.onClick();
@@ -22,16 +25,24 @@ export class CartListComponent implements OnInit {
   }
 
   items: Array<ICartItem>;
+  clearanceList : Array<ICartItem>;
   info: Info;
 
- @Output() update: EventEmitter<ICartItem>;
-   constructor(private cartService: CartService) { 
+  @Output() update: EventEmitter<ICartItem>;
+
+   constructor(private cartService: CartService,
+  private clearancePipe: ClearancePipe) { 
     this.info = cartService.info;
     console.log('CartListComponent, constructor, this.info.total='+this.info.total);
    }
 
+   getClearanceList() {
+      this.clearanceList = this.clearancePipe.transform(this.items);
+      console.log("clearnceList.count="+this.clearanceList.length);
+  }
   ngOnInit() {
     this.items = this.cartService.getCartItems();
+    this.getClearanceList();
   }
  
   ngOnDestroy(): void {

@@ -10,4 +10,12 @@
   </div>
   <div ng-class="summaryClass">Total items: {{info.total}}</div> 
   <div>Cart summary: {{info.totalSum}}</div> 
+  <div>Cart updated: {{info.updated | date:short}} <span style="color:green">Date formatted!</span></div> 
 </div>
+<div><span style="color:green">clearance items {{clearanceList.length}}</span></div>
+ <ul *ngFor="let it2 of clearanceList">
+      <li>id: {{it2.id}}, name: {{it2.name}}
+      </li>
+    </ul>
+    <div>
+ 

@@ -4,6 +4,7 @@ import { ICartItem,CartItem } from './models/cart.item.model';
 export interface Info {
    total:number;
    totalSum:number;
+   updated : Date
 }
 
 @Injectable()
@@ -12,15 +13,15 @@ export class CartService {
     idx : number;
     cartItems : Array<ICartItem> ;
 
-    info: Info = { total : 0, totalSum :0 };
+    info: Info = { total : 0, totalSum :0, updated : new Date() };
 
     constructor() {
         this.idx=1;
         
         this.cartItems =[
-        new CartItem( this.idx++, 'cart item 1',1,10,false),
-        new CartItem(this.idx++, 'cart item 2',2,20,true),
-        new CartItem(this.idx++, 'cart item 3',4,30,true)
+        new CartItem( this.idx++, 'cart item 1',1,10.444,false),
+        new CartItem(this.idx++, 'cart item 2',2,20.666,true),
+        new CartItem(this.idx++, 'cart item 3',4,30.555,true)
         ];
 
         this.updateTotals();
@@ -75,6 +76,7 @@ export class CartService {
     {
         this.countItemsQuantityInCart();
         this.countCartSum();
+        this.info.updated = new Date();
     }
 
 }
