@@ -28,7 +28,7 @@ import { ClickDirective } from './directives/click.directive';
   ],
   providers: [
     LocalStorageService,
-    AppConstsService
+    //AppConstsService
     ],
   bootstrap: [AppComponent]
 }) 
