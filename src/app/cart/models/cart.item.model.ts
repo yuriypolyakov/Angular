@@ -1,5 +1,6 @@
 export interface ICartItem{  
     id: number;
+    productId: number;
     name: string;
     quantity: number;
     price : number;
@@ -13,6 +14,7 @@ export class CartItem implements ICartItem{
  
   constructor(
     public id: number,
+    public productId: number=0,
     public name: string,
     public quantity: number,
     public price: number=0,

@@ -3,6 +3,8 @@ import { CartItem,ICartItem } from '../models/cart.item.model';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CartService,Info } from '../cart.service';
 import { ClearancePipe } from './../pipes/clearance.pipe';
+import { ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-cart-list',
@@ -31,7 +33,8 @@ export class CartListComponent implements OnInit {
   @Output() update: EventEmitter<ICartItem>;
 
    constructor(private cartService: CartService,
-  private clearancePipe: ClearancePipe) { 
+  private clearancePipe: ClearancePipe,
+private route: ActivatedRoute) { 
     this.info = cartService.info;
     console.log('CartListComponent, constructor, this.info.total='+this.info.total);
    }

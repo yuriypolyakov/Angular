@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Product</div>
+	<div class="panel-body">
+		<ul>
+			<li>id: {{product.id}}</li>
+			<li>Name: {{product.name}}</li> 
+			<li>Quantity: {{product.quantity}}</li>
+			<li>price: {{product.price | currency:'USD':true:'2.1-1'}}</li>
+		</ul>
+		<button class="btn btn-warning btn-sm"
+					(click)="editProduct()">			Edit		
+		</button>
+		<button 
+           
+            class="btn btn-primary"
+           (click)="addProductToCart()">Add to Cart
+        </button>  
+	</div>
+</div>
+

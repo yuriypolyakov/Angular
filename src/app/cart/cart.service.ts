@@ -18,11 +18,11 @@ export class CartService {
     constructor() {
         this.idx=1;
         
-        this.cartItems =[
-        new CartItem( this.idx++, 'cart item 1',1,10.444,false),
+        this.cartItems =[];
+        /*new CartItem( this.idx++, 'cart item 1',1,10.444,false),
         new CartItem(this.idx++, 'cart item 2',2,20.666,true),
         new CartItem(this.idx++, 'cart item 3',4,30.555,true)
-        ];
+        ];*/
 
         this.updateTotals();
     }
@@ -32,7 +32,11 @@ export class CartService {
     }
 
     create(name: string,quantity:number) {
-	  this.cartItems.push(new CartItem(this.idx++,name,quantity));
+	  //this.cartItems.push(new CartItem(this.idx++,name,quantity));
+    }
+    
+    addProduct(productId: number, quantity:number) {
+	  this.cartItems.push(new CartItem(this.idx++,productId,"",quantity));
 	}
 
     update(item: ICartItem): void {

@@ -1,6 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CartModule } from './cart/cart.module';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+
+import { Router } from '@angular/router';
+import { AppRoutingModule,appRouterComponents  } from './app.routing.module';
 
 import { AppComponent } from './app.component';
 import { ProductModule } from './product/product.module';
@@ -19,12 +26,15 @@ import { ClickDirective } from './directives/click.directive';
     StorageComponent,
     AppSettingsComponent,
     RandomStringComponent,
+    appRouterComponents,
     ClickDirective
   ],
   imports: [
     BrowserModule,
     CartModule,
-    ProductModule
+    ProductModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [
     LocalStorageService,
@@ -33,4 +43,8 @@ import { ClickDirective } from './directives/click.directive';
   bootstrap: [AppComponent]
 }) 
 
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}
