@@ -7,14 +7,16 @@
 			<li>Quantity: {{product.quantity}}</li>
 			<li>price: {{product.price | currency:'USD':true:'2.1-1'}}</li>
 		</ul>
-		<button class="btn btn-warning btn-sm"
+		<!--button class="btn btn-warning btn-sm"
 					(click)="editProduct()">			Edit		
-		</button>
-		<button 
-           
+		</button-->
+	
+		<button *ngIf="!productInCart()"         
             class="btn btn-primary"
            (click)="addProductToCart()">Add to Cart
-        </button>  
+		</button>  
+		<span *ngIf="productInCart()">already in cart
+		</span>  
 	</div>
 </div>
 

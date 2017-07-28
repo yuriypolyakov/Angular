@@ -30,6 +30,11 @@ export class ProductComponent implements OnInit {
 
   addProductToCart()
   {
-    //this.cartService.create();
+    this.cartService.addProduct(this.product.id,1);
+  }
+
+  productInCart() : boolean
+  {
+    return this.cartService.isProductInCart(this.product.id);
   }
 }

@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
     private route: ActivatedRoute
 ) { 
     this.info = cartService.info;
-     console.log('CartComponent, constructor, this.info.total='+this.info.total);
+     //console.log('CartComponent, constructor, this.info.total='+this.info.total);
     /*this._subscription = cartService.nameChange.subscribe((value) => { 
       this.name = value; 
     });*/
@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
 
   ngOnChanges()
   {
-    console.log('CartComponent, ngOnChanges');
+    //console.log('CartComponent, ngOnChanges');
     //this.totalQuantity = this.cartService.countItemsQuantityInCart();
   }
   

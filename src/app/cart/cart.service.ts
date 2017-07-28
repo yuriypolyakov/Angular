@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ICartItem,CartItem } from './models/cart.item.model';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 export interface Info {
    total:number;
@@ -19,13 +20,22 @@ export class CartService {
         this.idx=1;
         
         this.cartItems =[];
-        /*new CartItem( this.idx++, 'cart item 1',1,10.444,false),
-        new CartItem(this.idx++, 'cart item 2',2,20.666,true),
-        new CartItem(this.idx++, 'cart item 3',4,30.555,true)
+        /*new CartItem( this.idx++, 1,1,false),
+        new CartItem(this.idx++,2,2,true),
+        new CartItem(this.idx++,3,4,true)
         ];*/
 
         this.updateTotals();
     }
+
+    // Observable navItem source
+  private _navItemSource = new BehaviorSubject<number>(0);
+  // Observable navItem stream
+  navItem$ = this._navItemSource.asObservable();
+  // service command
+  changeNav(number) {
+    this._navItemSource.next(number);
+  }
 
     getCartItems(): Array<ICartItem> {
         return this.cartItems;
@@ -36,7 +46,8 @@ export class CartService {
     }
     
     addProduct(productId: number, quantity:number) {
-	  this.cartItems.push(new CartItem(this.idx++,productId,"",quantity));
+      this.cartItems.push(new CartItem(this.idx++,productId,quantity));
+        this._navItemSource.next(productId);
 	}
 
     update(item: ICartItem): void {
@@ -46,7 +57,7 @@ export class CartService {
         {
             found.quantity = item.quantity;
             this.updateTotals();
-            
+            this._navItemSource.next(item.id);
         }
     }
 
@@ -64,9 +75,9 @@ export class CartService {
 
     private countCartSum(){
         this.info.totalSum=0;
-        this.cartItems.forEach(
+       /* this.cartItems.forEach(
             s => this.info.totalSum += s.quantity*s.price
-        ) ;
+        ) ;*/
     }   
 
     private countItemsQuantityInCart(){
@@ -81,6 +92,12 @@ export class CartService {
         this.countItemsQuantityInCart();
         this.countCartSum();
         this.info.updated = new Date();
+    }
+
+    public isProductInCart(id:number) : boolean
+    {
+        var found = this.cartItems.find(c => c.productId==id);
+        return found!=null;
     }
 
 }

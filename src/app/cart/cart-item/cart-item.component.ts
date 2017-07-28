@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, ViewChild,ElementRef } from '@angular/core';
 import { ICartItem } from "../models/cart.item.model";
 //import { ProductService } from './../../product/services/product.service';
+import { CartProductItem } from '../../models/cart-product.model';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,7 +10,7 @@ import { ICartItem } from "../models/cart.item.model";
 })
 export class CartItemComponent implements OnInit {
 
-@Input()  CartItem: ICartItem;
+@Input()  CartItem: CartProductItem;
 @Output() update: EventEmitter<ICartItem>;
 @Output() delete: EventEmitter<number>;
 
@@ -41,18 +42,18 @@ export class CartItemComponent implements OnInit {
   }
 
   ngOnDestroy(): void { 
-    console.log('On Destroy Hook');
+    //console.log('On Destroy Hook');
   }
 
   updateQuantity(updatedItem: {quantity: number}): void {
     console.log('CartItemComponent, updateQuantity method:', this.CartItem, ", event=",updatedItem.quantity);
-    this.CartItem.quantity = +updatedItem.quantity ;
+    this.CartItem.cartItem.quantity = +updatedItem.quantity ;
     console.log('CartItemComponent, updatedItem =', this.CartItem);
-    this.update.emit(this.CartItem);
+    this.update.emit(this.CartItem.cartItem);
   }
 
   deleteItem(): void {
     console.log('CartItemComponent, deleteItem method:', this.CartItem);
-      this.delete.emit(this.CartItem.id);
+      this.delete.emit(this.CartItem.cartItem.id);
   }
 } 

@@ -5,7 +5,8 @@ import { Product } from './../../models/product.model';
 const productList = [
       new Product( 1, 'Product1',4,100),
       new Product(2, 'Product2',6,500),
-      new Product(3, 'Product3',7,800)
+      new Product(3, 'Product3',7,800),
+      new Product(4, 'Product4',7,800)
     ];
 
 const productListPromise = Promise.resolve(productList);
@@ -23,10 +24,14 @@ export class ProductService {
     return productListPromise;
   }
 
-getUser(id: number | string): Promise<Product> {
+getProduct(id: number | string): Promise<Product> {
+    //console.log("getProduct");
     return this.getProducts()
-      .then(products => this.products.find(product => product.id === +id))
-      .catch(() => Promise.reject('Error in getUser method'));
+      .then(prod => 
+        { //console.log("getProduct, id="+id);
+          return prod.find(product => product.id === +id);}
+      )
+      .catch(() => Promise.reject('Error in getProduct method, id='+id));
   }
 
   addProduct(user: Product): void {

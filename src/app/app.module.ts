@@ -18,6 +18,7 @@ import { AppConstsService } from './app-settings/app-consts.service';
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { RandomStringComponent } from './random-string/random-string.component';
 import { ClickDirective } from './directives/click.directive';
+import { CartProductService } from './services/cart-product.service';
 
 @NgModule({
   declarations: [
@@ -38,13 +39,14 @@ import { ClickDirective } from './directives/click.directive';
   ],
   providers: [
     LocalStorageService,
-    AppConstsService
+    AppConstsService,
+    CartProductService
     ],
   bootstrap: [AppComponent]
 }) 
 
 export class AppModule {
   constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    //console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
   }
 }
