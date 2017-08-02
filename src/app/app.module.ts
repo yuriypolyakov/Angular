@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { AdminModule } from './admin/admin.module';
 
 import { Router } from '@angular/router';
 import { AppRoutingModule,appRouterComponents  } from './app.routing.module';
@@ -19,6 +20,7 @@ import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { RandomStringComponent } from './random-string/random-string.component';
 import { ClickDirective } from './directives/click.directive';
 import { CartProductService } from './services/cart-product.service';
+import { ProductAddedService } from './services/product-added.service';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { CartProductService } from './services/cart-product.service';
     BrowserModule,
     CartModule,
     ProductModule,
+    AdminModule,
     RouterModule,
     AppRoutingModule
   ],
   providers: [
     LocalStorageService,
     AppConstsService,
-    CartProductService
+    CartProductService,
+    ProductAddedService
     ],
   bootstrap: [AppComponent]
 }) 

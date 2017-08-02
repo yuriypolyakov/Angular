@@ -47,7 +47,9 @@ export class CartItemComponent implements OnInit {
 
   updateQuantity(updatedItem: {quantity: number}): void {
     console.log('CartItemComponent, updateQuantity method:', this.CartItem, ", event=",updatedItem.quantity);
+    this.CartItem.product.quantity = this.CartItem.product.quantity+this.CartItem.cartItem.quantity-updatedItem.quantity ;
     this.CartItem.cartItem.quantity = +updatedItem.quantity ;
+    
     console.log('CartItemComponent, updatedItem =', this.CartItem);
     this.update.emit(this.CartItem.cartItem);
   }

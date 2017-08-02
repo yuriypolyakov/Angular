@@ -5,7 +5,7 @@ import { ProductComponent,ProductsComponent,ProductListComponent,ProductFormComp
 
 const routes: Routes = [
   {
-    path: 'products',
+    path: 'products/:mode',
     component: ProductsComponent,
     children: [
       {
@@ -21,7 +21,8 @@ const routes: Routes = [
       },
       {
         path: '',
-        component: ProductListComponent
+        component: ProductListComponent,
+        
       },
     ]
   }

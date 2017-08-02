@@ -35,13 +35,13 @@ getProduct(id: number | string): Promise<Product> {
   }
 
   addProduct(user: Product): void {
-    this.products.push(user);
+    productList.push(user);
   }
 
   updateProduct(user: Product): void {
     let i = -1;
 
-    this.products.forEach((item, index) => {
+    productList.forEach((item, index) => {
       if (item.id === user.id ) {
         i = index;
         return false;
@@ -49,7 +49,7 @@ getProduct(id: number | string): Promise<Product> {
     });
 
     if (i > -1) {
-      this.products.splice(i, 1, user);
+      productList.splice(i, 1, user);
     }
   }
 }
