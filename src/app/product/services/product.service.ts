@@ -6,7 +6,8 @@ const productList = [
       new Product( 1, 'Product1',4,100),
       new Product(2, 'Product2',6,500),
       new Product(3, 'Product3',7,800),
-      new Product(4, 'Product4',7,800)
+      new Product(4, 'Product4',7,800),
+      new Product(4, 'Product4',0,800)
     ];
 
 const productListPromise = Promise.resolve(productList);

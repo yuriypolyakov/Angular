@@ -92,25 +92,24 @@ private fillItems()
     }
 
     addProductToCart(productId: number)
-  {
-      
-console.log("CartProductService::addProductToCart");
-       this.productService.getProduct(productId).then(
-        product => {
-      // todo: check maybe -1 if id not found
-      if (product) {
-          this.cartService.addProduct(productId,1);
-            product.quantity--;
-            this.productService.updateProduct(product);
-            //console.log("CartProductService::updateProduct done");
-      } 
-      else { // id not found
-       
-      }
-      });
+    {
+        if (this.isProductInCart(productId)) return;
 
-      
-  }
+        console.log("CartProductService::addProductToCart");
+        this.productService.getProduct(productId).then(
+            product => {
+        // todo: check maybe -1 if id not found
+        if (product) {
+            this.cartService.addProduct(productId,1);
+                product.quantity--;
+                this.productService.updateProduct(product);
+                //console.log("CartProductService::updateProduct done");
+            } 
+            else { // id not found
+            
+            }
+        });
+    }
 
     public isProductInCart(id:number) : boolean
     {
@@ -119,4 +118,45 @@ console.log("CartProductService::addProductToCart");
         return found!=null;
     }
 
+    removeCartItem(cartId: number)
+    {
+        console.log("CartProductService::removeCartItem, id="+cartId);
+
+        let item = this.items.find(s=> s.cartItem.id==cartId);
+
+        if (item==null)
+        { 
+            console.warn("CartProductService::removeCartItem can't find item with id="+cartId);
+            return;
+        }
+        
+
+        item.product.quantity+=item.cartItem.quantity;
+
+       
+    
+        var index = this.items.indexOf(item);
+        this.items.splice(index, 1);  
+
+         this.cartService.delete(cartId);
+         this.updateTotals();
+        /*
+
+        
+        this.productService.getProduct(productId).then(
+            product => {
+        // todo: check maybe -1 if id not found
+        if (product) {
+            this.cartService.addProduct(productId,1);
+                product.quantity--;
+                this.productService.updateProduct(product);
+                //console.log("CartProductService::updateProduct done");
+        } 
+        else { // id not found
+        
+        }
+        });*/
+
+        
+    }
 }

@@ -20,6 +20,6 @@
 			<!--li>price: {{product.price | currency:'USD':true:'2.1-1'}}</li-->
 		</ul>
 		<button (click)='updateQuantity({"quantity": quantity.value}); $event.stopPropagation()'>Update quantity</button>
-		<button (click)='deleteItem(CartItem.cartItem.id); $event.stopPropagation()'>Delete</button>
+		<button (click)='deleteItem(); $event.stopPropagation()'>Delete</button>
 	</div>
 </div>

@@ -22,7 +22,11 @@ export class CartListComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    (<HTMLLabelElement>this.labelField.nativeElement).textContent = 'loaded';
+
+    if (this.info.total>0)
+      {
+        (<HTMLLabelElement>this.labelField.nativeElement).textContent = 'loaded';
+      }
     //this.child.onClick();
 
     console.log(this.childComp);
@@ -61,10 +65,10 @@ private route: ActivatedRoute) {
     this.cartService.update(item);
 }
 
-onDeleteItem(id: number): void {
-    console.log('CartListComponent::onDeleteItem, item', id);
+onDeleteItem(item: ICartItem): void {
+    console.log('CartListComponent::onDeleteItem, item', item);
     
-    this.cartService.delete(id);
-    
+    this.productService.removeCartItem(item.id);
+   
   }
 }

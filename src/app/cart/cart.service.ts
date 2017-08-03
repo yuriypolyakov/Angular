@@ -67,9 +67,10 @@ export class CartService {
         if (found!=null)
         {
             console.log('Delete!');
-            var index = this.cartItems.indexOf(found);
+            found.quantity = 0;
+                    var index = this.cartItems.indexOf(found);
             this.cartItems.splice(index, 1);    
-            this.updateTotals();
+            //this.updateTotals();
         }
     }
 

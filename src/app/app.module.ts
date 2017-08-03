@@ -21,6 +21,7 @@ import { RandomStringComponent } from './random-string/random-string.component';
 import { ClickDirective } from './directives/click.directive';
 import { CartProductService } from './services/cart-product.service';
 import { ProductAddedService } from './services/product-added.service';
+import { ConfirmDialogService } from './services/confirm-dialog.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ProductAddedService } from './services/product-added.service';
     LocalStorageService,
     AppConstsService,
     CartProductService,
-    ProductAddedService
+    ProductAddedService,
+    ConfirmDialogService
     ],
   bootstrap: [AppComponent]
 }) 

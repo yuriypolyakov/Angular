@@ -1,21 +1,25 @@
 <div>
-  <div>Cart items <label #label></label></div>
+  <div *ngIf="info.total>0">Cart items <label #label></label></div>
+  
   <div ng-model="summaryClass">
        <app-cart-item #child
         *ngFor="let it of items" 
         [CartItem]="it"
-        (update)="onUpdateItem(it)"
-        (delete)="onDeleteItem(it.id)"
+        (update)="onUpdateItem(it.cartItem)"
+        (delete)="onDeleteItem(it.cartItem)"
        ></app-cart-item>
   </div>
-  <div ng-class="summaryClass">Total items: {{info.total}}</div> 
+  <span *ngIf="info.total>0">    
+  <div ng-class="summaryClass" >Total items: {{info.total}}</div> 
   <div>Cart summary: {{info.totalSum}}</div> 
+  </span>
+  <label *ngIf="info.total==0">Cart is empty!</label>
   <div>Cart updated: {{info.updated | date:short}} <span style="color:green">Date formatted!</span></div> 
 </div>
-<div><span style="color:green">clearance items {{clearanceList.length}}</span></div>
+<div *ngIf="info.total>0">
+  <span style="color:green">clearance items {{clearanceList.length}}</span>
  <ul *ngFor="let it2 of clearanceList">
       <li>id: {{it2.id}}, name: {{it2.name}}
       </li>
     </ul>
-    <div>
- 
+</div>

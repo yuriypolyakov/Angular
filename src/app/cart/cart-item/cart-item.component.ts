@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListen
 import { ICartItem } from "../models/cart.item.model";
 //import { ProductService } from './../../product/services/product.service';
 import { CartProductItem } from '../../models/cart-product.model';
+import { ProductAddedService } from './../../services/product-added.service';
+import { ConfirmDialogService }  from './../../services/confirm-dialog.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -12,7 +14,7 @@ export class CartItemComponent implements OnInit {
 
 @Input()  CartItem: CartProductItem;
 @Output() update: EventEmitter<ICartItem>;
-@Output() delete: EventEmitter<number>;
+@Output() delete: EventEmitter<ICartItem>;
 
 @ViewChild('topelement') topelement: ElementRef;
 @HostBinding('class') class = 'task';
@@ -33,9 +35,11 @@ export class CartItemComponent implements OnInit {
   //  console.log('mouseleave event on host element');
   }
 
-  constructor() {
+  constructor(private productAddedService: ProductAddedService,
+    private confirmDialogService: ConfirmDialogService,
+  ) {
     this.update = new EventEmitter<ICartItem>();
-    this.delete = new EventEmitter<number>();
+    this.delete = new EventEmitter<ICartItem>();
   }
 
   ngOnInit() {
@@ -47,7 +51,13 @@ export class CartItemComponent implements OnInit {
 
   updateQuantity(updatedItem: {quantity: number}): void {
     console.log('CartItemComponent, updateQuantity method:', this.CartItem, ", event=",updatedItem.quantity);
-    this.CartItem.product.quantity = this.CartItem.product.quantity+this.CartItem.cartItem.quantity-updatedItem.quantity ;
+    let newQuantity = this.CartItem.product.quantity+this.CartItem.cartItem.quantity-updatedItem.quantity ;
+    if (newQuantity<0)
+    {
+      let possibleAmount = +this.CartItem.product.quantity+this.CartItem.cartItem.quantity;
+      return this.productAddedService.inform('product quantity is not available, please select not more then '+possibleAmount);
+    }
+    this.CartItem.product.quantity = newQuantity;
     this.CartItem.cartItem.quantity = +updatedItem.quantity ;
     
     console.log('CartItemComponent, updatedItem =', this.CartItem);
@@ -56,6 +66,16 @@ export class CartItemComponent implements OnInit {
 
   deleteItem(): void {
     console.log('CartItemComponent, deleteItem method:', this.CartItem);
-      this.delete.emit(this.CartItem.cartItem.id);
+    this.confirmDialogService.confirm('delete cart item?').then
+    (choise => {
+     
+      if (choise) {
+       this.delete.emit(this.CartItem.cartItem);
+      } 
+      else { 
+       
+      }
+    });
+      
   }
 } 
