@@ -14,7 +14,6 @@ import { ConfirmDialogService } from './../../services/confirm-dialog.service';
 })
 export class ProductComponent implements OnInit {
 @Input() product: Product;
-@Input() cartMode: boolean;
 
   constructor(   private router: Router,
     private route: ActivatedRoute,
@@ -26,27 +25,7 @@ private cartProductService: CartProductService,
   ngOnInit() {
   }
 
-   editProduct() {
-    const link = ['admin/products/edit', this.product.id];
-    this.router.navigate(link);
-    // or
-    // const link = ['edit', this.user.id];
-    // this.router.navigate(link, {relativeTo: this.route});
-  }
-
-  canDelete() :boolean
-  {
-    return this.cartProductService.canRemoveProduct(this.product.id);
-  }
-
-  deleteProduct() {
-    if (this.confirmDialogService.confirm("delete product "+this.product.name+" ?"))
-    {
-      this.cartProductService.removeProduct(this.product.id);
-    }
-  }
-
-  addProductToCart()
+    addProductToCart()
   {
     this.cartProductService.addProductToCart(this.product.id);
     return this.productAddedService.inform('Product added to cart!');

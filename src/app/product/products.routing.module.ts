@@ -14,16 +14,7 @@ const routes: Routes = [
     component: ProductListComponent,
     
   },
-  /*{
-    path: 'add',
-    component: ProductFormComponent
-  },
-  {
-    path: 'edit/:id',
-    component: ProductFormComponent,
-    //canDeactivate: [CanDeactivateGuard],
-    //resolve: {          user: ProductResolveGuard        }
-  },*/
+ 
 ];
 
 export let productRouterComponents = [ProductComponent,  ProductListComponent];

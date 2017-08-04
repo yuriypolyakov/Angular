@@ -15,7 +15,6 @@ import { ConfirmDialogService } from './../../../services/confirm-dialog.service
 export class ManageProductComponent implements OnInit {
 
 @Input() product: Product;
-@Input() cartMode: boolean;
 
   constructor(   private router: Router,
     private route: ActivatedRoute,
@@ -47,15 +46,5 @@ private cartProductService: CartProductService,
     }
   }
 
-  addProductToCart()
-  {
-    this.cartProductService.addProductToCart(this.product.id);
-    return this.productAddedService.inform('Product added to cart!');
-  }
-
-  productInCart() : boolean
-  {
-    return this.cartService.isProductInCart(this.product.id);
-  }
-
+  
 }

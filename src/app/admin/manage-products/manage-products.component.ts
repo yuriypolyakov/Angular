@@ -13,7 +13,6 @@ export class ManageProductsComponent implements OnInit {
 products: Array<Product>;
 
   private editedProduct: Product;
-  private cartMode: boolean=true;
 
   constructor(
     private productService: ProductService,
@@ -26,16 +25,6 @@ products: Array<Product>;
       .then(products => this.products = products)
       .catch((err) => console.log(err));
 
-      this.route.params
-      .switchMap((params: Params) => params['mode'])
-      .subscribe(
-        (mode: string) => {
-          console.log("ManageProductsComponent::ngOnInit, mode="+mode);
-          this.cartMode = mode=="c";
-         //console.log(`product list display mode:  ${this.mode}`);
-        },
-        (err) => console.log(err)
-      );
           // listen id from UserFormComponent
     this.route.params
       .switchMap((params: Params) => this.productService.getProduct(+params['id']))
