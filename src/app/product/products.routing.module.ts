@@ -1,7 +1,7 @@
 import { NgModule }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProductComponent,ProductsComponent,ProductListComponent,ProductFormComponent } from '.';
+import { ProductComponent,ProductListComponent } from '.';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ProductListComponent,
     
   },
-  {
+  /*{
     path: 'add',
     component: ProductFormComponent
   },
@@ -23,10 +23,10 @@ const routes: Routes = [
     component: ProductFormComponent,
     //canDeactivate: [CanDeactivateGuard],
     //resolve: {          user: ProductResolveGuard        }
-  },
+  },*/
 ];
 
-export let usersRouterComponents = [ProductComponent, ProductsComponent, ProductListComponent, ProductFormComponent];
+export let productRouterComponents = [ProductComponent,  ProductListComponent];
 
 @NgModule({
   imports: [

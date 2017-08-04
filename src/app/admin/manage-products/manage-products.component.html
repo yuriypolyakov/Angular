@@ -1,3 +1,9 @@
-<p>
-  manage-products works!
-</p>
+<app-manage-product 
+  *ngFor="let product of products" 
+  [product]="product" 
+    [class.edited]="isEdited(product)"
+  >  
+</app-manage-product>
+<button class="btn btn-warning btn-sm"
+					(click)="addProduct()">Add		
+</button>

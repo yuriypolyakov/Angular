@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent, ProductService } from '.';
-import { ProductsRoutingModule, usersRouterComponents } from './products.routing.module';
+import { ProductsRoutingModule, productRouterComponents } from './products.routing.module';
 //import { CartModule } from './../cart/cart.module';
 
 @NgModule({
@@ -12,11 +12,10 @@ import { ProductsRoutingModule, usersRouterComponents } from './products.routing
     ProductsRoutingModule,
     //CartModule
   ],
-  declarations: [ usersRouterComponents,
-    ProductComponent,
+  declarations: [ productRouterComponents,    ProductComponent,
   ],
    providers: [
     ProductService
     ],
 })
-export class ProductModule { }
+export class ProductModule { } 

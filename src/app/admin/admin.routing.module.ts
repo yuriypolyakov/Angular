@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent, AdminDashboardComponent, ManageProductsComponent } from '.';
-import { ProductListComponent } from './../product/product-list/product-list.component';
-import { ProductFormComponent } from './../product/product-form/product-form.component';
+import { AdminComponent, AdminDashboardComponent, ManageProductsComponent,ProductFormComponent,ManageProductComponent } from '.';
+//import { ProductListComponent } from './../product/product-list/product-list.component';
+//import { ProductFormComponent } from './../product/product-form/product-form.component';
 import { ProductResolveGuard }   from './../guards/product-resolve.guard';
 import { AuthGuard } from './../guards/auth.guard';
 
@@ -22,7 +22,7 @@ const routes: Routes = [
             component: ProductFormComponent,
            
              },
-          { path: 'products/:mode', component: ProductListComponent },
+          { path: 'products/:mode', component: ManageProductsComponent },
 
           {
             path: 'products/edit/:id',
@@ -33,18 +33,14 @@ const routes: Routes = [
         
 
           },
-           
-        
-
-         
-            { path: '', component: AdminDashboardComponent },
+         { path: '', component: AdminDashboardComponent },
         ]
-      }
+      } 
     ]
   }
 ];
 
-export let adminRouterComponents = [AdminComponent, AdminDashboardComponent, ProductListComponent,ProductFormComponent];
+export let adminRouterComponents = [AdminComponent, AdminDashboardComponent, ManageProductsComponent, ProductFormComponent,ManageProductComponent/*ProductListComponent,ProductFormComponent*/];
 
 @NgModule({
   imports: [

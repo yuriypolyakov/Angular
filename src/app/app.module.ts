@@ -24,6 +24,8 @@ import { ProductAddedService } from './services/product-added.service';
 import { ConfirmDialogService } from './services/confirm-dialog.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
+/*import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductFormComponent } from './product/product-form/product-form.component';*/
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { AuthService } from './services/auth.service';
     RandomStringComponent,
     appRouterComponents,
     ClickDirective,
+   //ProductListComponent, ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,6 @@ import { AuthService } from './services/auth.service';
 
 export class AppModule {
   constructor(router: Router) {
-    //console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
   }
 }
