@@ -22,13 +22,16 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     //private dialogService: DialogService
 
-  ) { }
+  ) { console.log("ProductFormComponent::constructor");}
 
   ngOnInit(): void {
+
     this.product = new Product(null, '', 0,0);
 
    this.route.data.forEach((data: { product: Product }) => {
+     console.log("ProductFormComponent::ngOnInit, routedata="+data.product);
       this.product = Object.assign({}, data.product);
+      console.log("ProductFormComponent::ngOnInit, this.product="+this.product.id);
       this.oldUser = data.product;
     });
 
@@ -49,16 +52,16 @@ export class ProductFormComponent implements OnInit {
     if (product.id) {
       this.productService.updateProduct(product);
       this.oldUser = this.product;
-      this.router.navigate(['/products', {id: product.id}]);
+      this.router.navigate(['/admin/products/a', {id: product.id}]);
     } 
     else {
       this.productService.addProduct(product);
       this.oldUser = this.product;
-      this.router.navigate(['/products']);
+      this.router.navigate(['/admin/products/a']);
     }
   }
 
-  goBack() {
+  goBack() { 
      this.router.navigate(['./../../'], { relativeTo: this.route});
   }
 

@@ -7,7 +7,7 @@ const productList = [
       new Product(2, 'Product2',6,500),
       new Product(3, 'Product3',7,800),
       new Product(4, 'Product4',7,800),
-      new Product(4, 'Product4',0,800)
+      new Product(5, 'Product5',0,800)
     ];
 
 const productListPromise = Promise.resolve(productList);
@@ -25,7 +25,7 @@ export class ProductService {
     return productListPromise;
   }
 
-getProduct(id: number | string): Promise<Product> {
+  getProduct(id: number | string): Promise<Product> {
     //console.log("getProduct");
     return this.getProducts()
       .then(prod => 
@@ -51,6 +51,18 @@ getProduct(id: number | string): Promise<Product> {
 
     if (i > -1) {
       productList.splice(i, 1, user);
+    }
+  }
+
+  delete(id: number): void 
+  {
+    console.log('ProductService, delete:', id);
+    var found = productList.find(c => c.id==id);
+    if (found!=null)
+    {
+        console.log('Delete!');
+        var index = productList.indexOf(found);
+        productList.splice(index, 1);    
     }
   }
 }

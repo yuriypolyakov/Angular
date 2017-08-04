@@ -7,11 +7,16 @@
 			<li>Quantity: {{product.quantity}}</li>
 			<li>price: {{product.price | currency:'USD':true:'2.1-1'}}</li>
 		</ul>
-		
-		<button *ngIf="!cartMode" class="btn btn-warning btn-sm"
-					(click)="editProduct()">			Edit		
-		</button>
-	    <span *ngIf="cartMode">
+		<span *ngIf="!cartMode">
+			<button  class="btn btn-warning btn-sm"
+						(click)="editProduct()">			Edit		
+			</button>
+			<button class="btn btn-warning btn-sm" [class.disabled]="!canDelete()"
+				(click)="deleteProduct()">
+					Delete		
+			</button>
+		</span >		
+	  <span *ngIf="cartMode">
 			<button *ngIf="!productInCart() && product.quantity>0"         
 				class="btn btn-primary"
 			(click)="addProductToCart()">Add to Cart

@@ -1,8 +1,9 @@
 <product 
   *ngFor="let product of products" 
   [product]="product" [cartMode]="cartMode"
+  [class.edited]="isEdited(product)"
   >  
 </product>
-<!--button class="btn btn-warning btn-sm"
+<button *ngIf="!cartMode" class="btn btn-warning btn-sm"
 					(click)="addProduct()">Add		
-</button-->
+</button>

@@ -5,27 +5,25 @@ import { ProductComponent,ProductsComponent,ProductListComponent,ProductFormComp
 
 const routes: Routes = [
   {
+    path: '',
+    component: ProductListComponent,
+    
+  },
+  {
     path: 'products/:mode',
-    component: ProductsComponent,
-    children: [
-      {
-        path: 'add',
-        component: ProductFormComponent
-      },
-      {
-        path: 'edit/:id',
-        component: ProductFormComponent,
-        //canDeactivate: [CanDeactivateGuard],
-        //resolve: {          user: UserResolveGuard        }
-
-      },
-      {
-        path: '',
-        component: ProductListComponent,
-        
-      },
-    ]
-  }
+    component: ProductListComponent,
+    
+  },
+  {
+    path: 'add',
+    component: ProductFormComponent
+  },
+  {
+    path: 'edit/:id',
+    component: ProductFormComponent,
+    //canDeactivate: [CanDeactivateGuard],
+    //resolve: {          user: ProductResolveGuard        }
+  },
 ];
 
 export let usersRouterComponents = [ProductComponent, ProductsComponent, ProductListComponent, ProductFormComponent];

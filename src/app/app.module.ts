@@ -22,6 +22,8 @@ import { ClickDirective } from './directives/click.directive';
 import { CartProductService } from './services/cart-product.service';
 import { ProductAddedService } from './services/product-added.service';
 import { ConfirmDialogService } from './services/confirm-dialog.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
     AppSettingsComponent,
     RandomStringComponent,
     appRouterComponents,
-    ClickDirective
+    ClickDirective,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,10 @@ import { ConfirmDialogService } from './services/confirm-dialog.service';
     AppConstsService,
     CartProductService,
     ProductAddedService,
-    ConfirmDialogService
+    ConfirmDialogService,
+    AuthGuard,
+    AuthService
+
     ],
   bootstrap: [AppComponent]
 }) 

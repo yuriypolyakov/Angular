@@ -32,8 +32,9 @@ export class CartProductService {
 
     return this.items;
     }
-private fillItems()
-{
+
+    private fillItems()
+    {
      this.items.length=0;
       
         let cartitems = this.cartService.getCartItems();
@@ -55,8 +56,8 @@ private fillItems()
       }
       });
       
-    console.log("CartProductService.fillItems, done");
-}
+     console.log("CartProductService.fillItems, done");
+    }
 
     private countCartSum(){
         //console.log("CartProductService::countCartSum");
@@ -156,7 +157,26 @@ private fillItems()
         
         }
         });*/
+    }
 
+    canRemoveProduct(productId: number) : boolean
+    {
+        // console.log("CartProductService::canRemoveProduct, id="+productId);
+
+        let item = this.items.find(s=> s.product.id==productId);
+
+        if (item==null)
+        { 
+            return true;
+        }
         
+        return false;
+    }
+
+    removeProduct(productId: number)
+    {
+        console.log("CartProductService::removeProduct, id="+productId);
+
+      this.productService.delete(productId);
     }
 }

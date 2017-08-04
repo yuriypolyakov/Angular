@@ -15,17 +15,17 @@ export class ProductListComponent implements OnInit {
 
 products: Array<Product>;
 
-  private editedUser: Product;
+  private editedProduct: Product;
   private cartMode: boolean=true;
 
   constructor(
-    private userArrayService: ProductService,
+    private productService: ProductService,
     private route: ActivatedRoute,
    private router: Router
   ) { }
 
   ngOnInit() {
-    this.userArrayService.getProducts()
+    this.productService.getProducts()
       .then(products => this.products = products)
       .catch((err) => console.log(err));
 
@@ -40,16 +40,15 @@ products: Array<Product>;
         (err) => console.log(err)
       );
           // listen id from UserFormComponent
-    /*this.route.params
-      .switchMap((params: Params) => this.userArrayService.getUser(+params['id']))
+    this.route.params
+      .switchMap((params: Params) => this.productService.getProduct(+params['id']))
       .subscribe(
-        (user: User) => {
-          this.editedUser = Object.assign({}, user);
-          console.log(`Last time you edit user ${JSON.stringify(this.editedUser)}`);
+        (product: Product) => {
+          this.editedProduct = Object.assign({}, product);
+          console.log(`Last time you edit product ${JSON.stringify(this.editedProduct)}`);
         },
         (err) => console.log(err)
       );
-*/
   }
 
   ngOnDestroy() {
@@ -57,16 +56,16 @@ products: Array<Product>;
 
   
   isEdited(user: Product) {
-    console.log("isEdited");
-    if (this.editedUser) {
-      console.log("editedUser.id="+this.editedUser.id+",  "+(user.id === this.editedUser.id));
-      return user.id === this.editedUser.id;
+    //console.log("ProductListComponent::isEdited");
+    if (this.editedProduct) {
+      //console.log("ProductListComponent::editedProduct.id="+this.editedProduct.id+",  "+(user.id === this.editedProduct.id));
+      return user.id === this.editedProduct.id;
     }
     return false;
   }
 
    addProduct() {
-    const link = ['/products/add'];
+    const link = ['/admin/products/add'];
     this.router.navigate(link);
     // or
     // const link = ['edit', this.user.id];

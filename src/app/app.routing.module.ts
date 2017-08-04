@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 
-import { HomeComponent, PageNotFoundComponent  } from './components';
+import { HomeComponent, PageNotFoundComponent,LoginComponent   } from './components';
 //import { AuthGuard } from './guards/auth.guard';
 //import { CustomPreloadingStrategyService } from './services';
 
@@ -13,12 +13,12 @@ const routes: Routes = [
     //component: AboutComponent,
     data: { title: 'About' }
   },*/
-  /*{ 
+  { 
     path: 'login', 
-    //component: LoginComponent,
+    component: LoginComponent,
     data: { title: 'Login' }
   },
-  {
+  /*{
     path: 'admin',
     //canLoad: [AuthGuard],
     //loadChildren: 'app/admin/admin.module#AdminModule',
@@ -43,7 +43,7 @@ const routes: Routes = [
   }
 ];
 
-export let appRouterComponents = [HomeComponent,PageNotFoundComponent];
+export let appRouterComponents = [HomeComponent,PageNotFoundComponent,LoginComponent ];
 
 @NgModule({
   imports: [

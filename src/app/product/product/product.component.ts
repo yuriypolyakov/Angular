@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from './../../cart/cart.service';
 import { CartProductService } from './../../services/cart-product.service';
 import { ProductAddedService } from './../../services/product-added.service';
+import { ConfirmDialogService } from './../../services/confirm-dialog.service';
 
 @Component({
   selector: 'product',
@@ -19,18 +20,30 @@ export class ProductComponent implements OnInit {
     private route: ActivatedRoute,
   private cartService: CartService,
 private cartProductService: CartProductService,
-    private productAddedService: ProductAddedService) { }
+    private productAddedService: ProductAddedService,
+  private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit() {
   }
 
    editProduct() {
-    const link = ['/products/edit', this.product.id];
+    const link = ['admin/products/edit', this.product.id];
     this.router.navigate(link);
     // or
     // const link = ['edit', this.user.id];
     // this.router.navigate(link, {relativeTo: this.route});
+  }
 
+  canDelete() :boolean
+  {
+    return this.cartProductService.canRemoveProduct(this.product.id);
+  }
+
+  deleteProduct() {
+    if (this.confirmDialogService.confirm("delete product "+this.product.name+" ?"))
+    {
+      this.cartProductService.removeProduct(this.product.id);
+    }
   }
 
   addProductToCart()
