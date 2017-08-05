@@ -46,7 +46,7 @@ export class CartService {
     }
     
     addProduct(productId: number, quantity:number) {
-      this.cartItems.push(new CartItem(this.idx++,productId,quantity));
+      this.cartItems.push(new CartItem(this.idx++,productId,quantity,false));
         this._navItemSource.next(productId);
 	}
 
@@ -99,6 +99,11 @@ export class CartService {
     {
         var found = this.cartItems.find(c => c.productId==id);
         return found!=null;
+    }
+
+    public moveCartItemsToOrder(orderId:number) 
+    {
+       this.cartItems.forEach(c => c.orderId=orderId);
     }
 
 }

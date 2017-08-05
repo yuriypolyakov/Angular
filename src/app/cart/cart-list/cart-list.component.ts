@@ -71,4 +71,9 @@ onDeleteItem(item: ICartItem): void {
     this.productService.removeCartItem(item.id);
    
   }
+
+  order(): void {
+    //console.log('CartListComponent::order');
+    this.productService.makeOrder();
+  }
 }

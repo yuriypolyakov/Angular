@@ -7,6 +7,7 @@ export interface ICartItem{
     shipped?: boolean;
     paid?: boolean;
     onClearance : boolean;
+    orderId?: number;
 }
 
 
@@ -19,6 +20,7 @@ export class CartItem implements ICartItem{
     public quantity: number,
     //public price: number=0,
     public onClearance: boolean=false,
+    public orderId : number=null
   ) { 
    
   }

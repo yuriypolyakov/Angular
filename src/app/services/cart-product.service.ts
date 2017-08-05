@@ -4,6 +4,7 @@ import { ProductService } from './../product/services/product.service';
 import { CartService,Info } from './../cart/cart.service';
 import {Subscription} from 'rxjs/Subscription';
 import { Product } from './../models/product.model';
+import { OrdersService } from './../orders/services/orders.service';
 
 export interface Info {
    total:number;
@@ -20,8 +21,11 @@ export class CartProductService {
     info: Info = { total : 0, totalSum :0, updated : new Date() };
     subscription:Subscription;
 
-    constructor(private cartService: CartService,
-    private productService: ProductService,) {
+    constructor(
+        private cartService: CartService,
+        private productService: ProductService,
+        private ordersService: OrdersService,
+        ) {
          this.subscription = this.cartService.navItem$
        .subscribe(item => { 
            this.updateTotals();})        ;
@@ -37,7 +41,7 @@ export class CartProductService {
     {
      this.items.length=0;
       
-        let cartitems = this.cartService.getCartItems();
+        let cartitems = this.cartService.getCartItems().filter(s=>s.orderId == null);
         this.productService.getProducts()
       .then(users => this.productitems = users)
       .catch((err) => console.log(err));
@@ -178,5 +182,20 @@ export class CartProductService {
         console.log("CartProductService::removeProduct, id="+productId);
 
       this.productService.delete(productId);
+    }
+
+    makeOrder()
+    {
+        console.log("CartProductService::makeOrder");
+        let cartItems : Array<number> = [];
+        
+        this.items.forEach( s => 
+            {
+                cartItems.push(s.cartItem.id);
+            } );
+       let orderId =  this.ordersService.addOrder(cartItems);
+        this.cartService.moveCartItemsToOrder(orderId);
+    this.fillItems();
+    this.updateTotals();
     }
 }

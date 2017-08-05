@@ -1,5 +1,7 @@
 <div>
-  <div *ngIf="info.total>0">Cart items <label #label></label></div>
+  <div *ngIf="info.total>0">Cart items <label #label></label> 
+    <button *ngIf="info.total>0"  (click)='order(); $event.stopPropagation()'>Order</button>
+  </div>
   
   <div ng-model="summaryClass">
        <app-cart-item #child
