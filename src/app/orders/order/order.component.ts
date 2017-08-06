@@ -9,15 +9,8 @@ import { Order } from './../../models/order.model';
 })
 export class OrderComponent {
   @Input()  order: Order;
-  @Output() onComplete = new EventEmitter<Order>();
-
+ 
   constructor() { }
 
-  completeTask(event: any): void {
-    this.onComplete.emit(this.order);
-  }
-
-  editTask() {
-    
-  }
+ 
 }

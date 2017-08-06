@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 
-import { HomeComponent, PageNotFoundComponent,LoginComponent   } from './components';
-//import { AuthGuard } from './guards/auth.guard';
-//import { CustomPreloadingStrategyService } from './services';
+import { HomeComponent, PageNotFoundComponent,LoginComponent, AboutComponent   } from './components';
 
 const routes: Routes = [
   { path: 'home',
     component: HomeComponent  },
-  /*{
+  {
     path: 'about',
-    //component: AboutComponent,
+    component: AboutComponent,
     data: { title: 'About' }
-  },*/
+  },
   { 
     path: 'login', 
     component: LoginComponent,
@@ -47,7 +45,7 @@ const routes: Routes = [
   }
 ];
 
-export let appRouterComponents = [HomeComponent,PageNotFoundComponent,LoginComponent ];
+export let appRouterComponents = [HomeComponent,PageNotFoundComponent,LoginComponent,AboutComponent ];
 
 @NgModule({
   imports: [

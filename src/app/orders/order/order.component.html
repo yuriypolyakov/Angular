@@ -3,15 +3,10 @@
 	<div class="panel-body">
 		<ul>
       <li>id: {{order.id}}</li>
-      <li>status: {{order.status}}</li>
+			<li>status: {{order.status}}</li>
+			<li>number of items: {{order.cartItems.length}}</li>
+			<li>order date: {{order.dateOrdered}}</li>
+			
 		</ul>
-		<button class="btn btn-primary" 
-			(click)="completeTask($event)">
-			Done
-		</button>
-		<button class="btn btn-warning btn-sm"
-			(click)="editTask()">
-			Edit
-		</button>
-	</div>
+		</div>
 </div>

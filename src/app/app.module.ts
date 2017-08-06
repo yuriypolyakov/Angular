@@ -27,6 +27,8 @@ import { AuthService } from './services/auth.service';
 import { OrdersModule } from './orders/orders.module';
 /*import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductFormComponent } from './product/product-form/product-form.component';*/
+import { LocalCartService } from './services/local-cart.service';
+//import { AboutComponent } from './components/src/app/components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { ProductFormComponent } from './product/product-form/product-form.compon
     RandomStringComponent,
     appRouterComponents,
     ClickDirective,
+    
    //ProductListComponent, ProductFormComponent
   ],
   imports: [
@@ -55,7 +58,8 @@ import { ProductFormComponent } from './product/product-form/product-form.compon
     ProductAddedService,
     ConfirmDialogService,
     AuthGuard,
-    AuthService
+    AuthService,
+    LocalCartService
 
     ],
   bootstrap: [AppComponent]

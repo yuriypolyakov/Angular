@@ -5,6 +5,8 @@ import { CartService,Info } from './../cart/cart.service';
 import {Subscription} from 'rxjs/Subscription';
 import { Product } from './../models/product.model';
 import { OrdersService } from './../orders/services/orders.service';
+import { LocalCartService } from './local-cart.service';
+
 
 export interface Info {
    total:number;
@@ -25,11 +27,35 @@ export class CartProductService {
         private cartService: CartService,
         private productService: ProductService,
         private ordersService: OrdersService,
+        private localCartService: LocalCartService,
+        
         ) {
          this.subscription = this.cartService.navItem$
-       .subscribe(item => { 
-           this.updateTotals();})        ;
-    }
+            .subscribe(item => { 
+            console.log("CartProductService::subscribe, "+item);
+             this.productService.getProduct(item).then(
+                product => {
+                    if (product)
+                        {
+                      product.quantity--;
+                    this.productService.updateProduct(product);
+                        }
+                });
+
+           
+           this.updateTotals();});
+        }
+
+        private loadFromStorage()
+        {
+            let storedItems =  this.localCartService.getItem("444");
+            console.log("loadFromStorage, "+storedItems);
+             this.items = storedItems;
+             storedItems.forEach(element => {
+                console.log("loadFromStorage element, id ="+element.cartItem.id);
+                //this.addProduct(element.product);
+             });
+        }
 
     getItems(): Array<CartProductItem> {
        this.fillItems();
@@ -40,12 +66,12 @@ export class CartProductService {
     private fillItems()
     {
      this.items.length=0;
-      
+
         let cartitems = this.cartService.getCartItems().filter(s=>s.orderId == null);
         this.productService.getProducts()
       .then(users => this.productitems = users)
       .catch((err) => console.log(err));
-    //let productsproductService
+    
     cartitems.forEach(element => {
       console.log("CartProductService.fillItems, getProduct, id ="+element.productId);
   
@@ -54,11 +80,13 @@ export class CartProductService {
       if (product) {
           console.log("CartProductService.fillItems, product found");
          this.items.push(new CartProductItem(element,product));
+       
       } 
       else { // id not found
         console.log("CartProductService.fillItems, product not found, id ="+element.productId);
       }
       });
+
       
      console.log("CartProductService.fillItems, done");
     }
@@ -103,24 +131,25 @@ export class CartProductService {
         console.log("CartProductService::addProductToCart");
         this.productService.getProduct(productId).then(
             product => {
-        // todo: check maybe -1 if id not found
+             this.addProduct(product);
+        });
+
+    }
+
+    private addProduct(product : Product)
+    {
         if (product) {
-            this.cartService.addProduct(productId,1);
-                product.quantity--;
-                this.productService.updateProduct(product);
-                //console.log("CartProductService::updateProduct done");
-            } 
+             this.cartService.addProduct(product.id,1);
+          } 
             else { // id not found
             
-            }
-        });
+        }
+       
     }
 
     public isProductInCart(id:number) : boolean
     {
-        let cartitems = this.cartService.getCartItems();
-        var found = cartitems.find(c => c.productId==id);
-        return found!=null;
+        return this.cartService.isProductInCart(id);
     }
 
     removeCartItem(cartId: number)
@@ -145,22 +174,7 @@ export class CartProductService {
 
          this.cartService.delete(cartId);
          this.updateTotals();
-        /*
-
-        
-        this.productService.getProduct(productId).then(
-            product => {
-        // todo: check maybe -1 if id not found
-        if (product) {
-            this.cartService.addProduct(productId,1);
-                product.quantity--;
-                this.productService.updateProduct(product);
-                //console.log("CartProductService::updateProduct done");
-        } 
-        else { // id not found
-        
-        }
-        });*/
+      
     }
 
     canRemoveProduct(productId: number) : boolean
@@ -190,12 +204,12 @@ export class CartProductService {
         let cartItems : Array<number> = [];
         
         this.items.forEach( s => 
-            {
-                cartItems.push(s.cartItem.id);
-            } );
-       let orderId =  this.ordersService.addOrder(cartItems);
+        {
+            cartItems.push(s.cartItem.id);
+        } );
+        let orderId =  this.ordersService.addOrder(cartItems);
         this.cartService.moveCartItemsToOrder(orderId);
-    this.fillItems();
-    this.updateTotals();
+        this.fillItems();
+        this.updateTotals();
     }
 }
