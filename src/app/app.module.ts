@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CartModule } from './cart/cart.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpModule,JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 //import { AdminModule } from './admin/admin.module';
 
@@ -47,6 +47,9 @@ import { LocalCartService } from './services/local-cart.service';
     CartModule,
     ProductModule,
     OrdersModule,
+    HttpModule,
+    JsonpModule,
+
    // AdminModule,
     RouterModule,
     AppRoutingModule

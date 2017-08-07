@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Product } from './../../models/product.model';
-import { ProductService } from './../services/product.service';
+import { ProductService,ProductPromiseService  } from './../';
 
 @Component({
   selector: 'app-product-list',
@@ -15,11 +15,11 @@ products: Array<Product>;
 
   constructor(
     private productService: ProductService,
-   
+    private productPromiseService: ProductPromiseService
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts()
+    this.productPromiseService.getProducts()
       .then(products => this.products = products)
       .catch((err) => console.log(err));
   }
