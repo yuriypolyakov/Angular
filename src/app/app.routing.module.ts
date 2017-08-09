@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 
-import { HomeComponent, PageNotFoundComponent,LoginComponent, AboutComponent   } from './components';
+import { PageNotFoundComponent,LoginComponent, AboutComponent   } from './components';
 
 const routes: Routes = [
-  { path: 'home',
-    component: HomeComponent  },
   {
     path: 'about',
     component: AboutComponent,
@@ -16,17 +14,6 @@ const routes: Routes = [
     component: LoginComponent,
     data: { title: 'Login' }
   },
-  /*{
-    path: 'admin',
-    //canLoad: [AuthGuard],
-    //loadChildren: 'app/admin/admin.module#AdminModule',
-        data: { title: 'Admin' }
-  },
-  {
-    path: 'products',
-    loadChildren: 'app/product/product.module#ProductModule',
-    data: { preload: true, title: 'Products' }
-  },*/
   {
     path: '',
     redirectTo: '/home',
@@ -45,7 +32,7 @@ const routes: Routes = [
   }
 ];
 
-export let appRouterComponents = [HomeComponent,PageNotFoundComponent,LoginComponent,AboutComponent ];
+export let appRouterComponents = [PageNotFoundComponent,LoginComponent,AboutComponent ];
 
 @NgModule({
   imports: [

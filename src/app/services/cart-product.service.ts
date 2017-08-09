@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+
 import { CartProductItem } from './../models/cart-product.model';
+import { Product } from './../models/product.model';
 import { ProductService } from './../product/services/product.service';
 import { ProductPromiseService } from './../product/services/product-promise.service';
 import { CartService,Info } from './../cart/cart.service';
-import {Subscription} from 'rxjs/Subscription';
-import { Product } from './../models/product.model';
 import { OrdersService } from './../orders/services/orders.service';
-import { LocalCartService } from './local-cart.service';
+import { LocalCartService } from '.';
 
 
 export interface Info {

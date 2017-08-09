@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, ViewChild,ElementRef } from '@angular/core';
 import { ICartItem } from "../models/cart.item.model";
-//import { ProductService } from './../../product/services/product.service';
+
 import { CartProductItem } from '../../models/cart-product.model';
 import { ProductAddedService } from './../../services/product-added.service';
 import { ConfirmDialogService }  from './../../services/confirm-dialog.service';
@@ -16,25 +16,6 @@ export class CartItemComponent implements OnInit {
 @Output() update: EventEmitter<ICartItem>;
 @Output() delete: EventEmitter<ICartItem>;
 
-@ViewChild('topelement') topelement: ElementRef;
-@HostBinding('class') class = 'task';
-
-  @HostListener('mouseenter', ['$event']) onMouseEnter(event) {
-     console.log(event.target);
-  }
-
-@HostListener('click') clicked() {
-    console.log('click event on host element');
-     (<HTMLDivElement>this.topelement.nativeElement).style.color = 'red';
-  }
-
-  @HostListener('mouseenter', ['$event']) enter(event: Event) {
-    //console.log('mouseenter event on host element');
-  }
-  @HostListener('mouseleave',  ['$event']) leave(event: Event) {
-  //  console.log('mouseleave event on host element');
-  }
-
   constructor(private productAddedService: ProductAddedService,
     private confirmDialogService: ConfirmDialogService,
   ) {
@@ -45,9 +26,6 @@ export class CartItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnDestroy(): void { 
-    //console.log('On Destroy Hook');
-  }
 
   updateQuantity(updatedItem: {quantity: number}): void {
     console.log('CartItemComponent, updateQuantity method:', this.CartItem, ", event=",updatedItem.quantity);

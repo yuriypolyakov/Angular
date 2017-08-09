@@ -16,7 +16,7 @@
   <div>Cart summary: {{info.totalSum}}</div> 
   </span>
   <label *ngIf="info.total==0">Cart is empty!</label>
-  <div>Cart updated: {{info.updated | date:short}} <span style="color:green">Date formatted!</span></div> 
+  <div>Cart updated: {{info.updated | date:short}} </div> 
 </div>
 <div *ngIf="info.total>0">
   <span style="color:green">clearance items {{clearanceList.length}}</span>
