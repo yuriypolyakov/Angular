@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './../../models/product.model';
-import { ProductService } from './../../product/services/product.service';
+//import { ProductService } from './../../product/services/product.service';
+import { ProductService,ProductPromiseService  } from './../../product/';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
@@ -16,18 +17,20 @@ products: Array<Product>;
 
   constructor(
     private productService: ProductService,
+    private productPromiseService: ProductPromiseService,
     private route: ActivatedRoute,
    private router: Router
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts()
+    this.productPromiseService.getProducts()
       .then(products => this.products = products)
       .catch((err) => console.log(err));
 
           // listen id from UserFormComponent
     this.route.params
-      .switchMap((params: Params) => this.productService.getProduct(+params['id']))
+      //.switchMap((params: Params) => this.productService.getProduct(+params['id']))
+      .switchMap((params: Params) => this.productPromiseService.getProduct(+params['id']))
       .subscribe(
         (product: Product) => {
           this.editedProduct = Object.assign({}, product);
@@ -58,5 +61,13 @@ products: Array<Product>;
     // this.router.navigate(link, {relativeTo: this.route});
 
   }
+
+  deleteProduct(product: Product) {
+    // this.cartProductService.removeProduct(this.product.id);
+    this.productPromiseService.delete(product.id)
+      .then(() => this.products = this.products.filter(t => t.id !== product.id))
+      .catch(err => console.log(err));
+  }
+
 
 }

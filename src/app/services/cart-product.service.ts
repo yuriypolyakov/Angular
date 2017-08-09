@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartProductItem } from './../models/cart-product.model';
 import { ProductService } from './../product/services/product.service';
+import { ProductPromiseService } from './../product/services/product-promise.service';
 import { CartService,Info } from './../cart/cart.service';
 import {Subscription} from 'rxjs/Subscription';
 import { Product } from './../models/product.model';
@@ -25,20 +26,20 @@ export class CartProductService {
 
     constructor(
         private cartService: CartService,
-        private productService: ProductService,
+        //private productService: ProductService,
         private ordersService: OrdersService,
         private localCartService: LocalCartService,
-        
+        private productPromiseService: ProductPromiseService,
         ) {
          this.subscription = this.cartService.navItem$
             .subscribe(item => { 
             console.log("CartProductService::subscribe, "+item);
-             this.productService.getProduct(item).then(
+             this.productPromiseService.getProduct(item).then(
                 product => {
                     if (product)
                         {
                       product.quantity--;
-                    this.productService.updateProduct(product);
+                    this.productPromiseService.updateProduct(product);
                         }
                 });
 
@@ -68,8 +69,8 @@ export class CartProductService {
      this.items.length=0;
 
         let cartitems = this.cartService.getCartItems().filter(s=>s.orderId == null);
-        this.productService.getProducts()
-      .then(users => this.productitems = users)
+        this.productPromiseService.getProducts()
+      .then(products => this.productitems = products)
       .catch((err) => console.log(err));
     
     cartitems.forEach(element => {
@@ -129,7 +130,7 @@ export class CartProductService {
         if (this.isProductInCart(productId)) return;
 
         console.log("CartProductService::addProductToCart");
-        this.productService.getProduct(productId).then(
+        this.productPromiseService.getProduct(productId).then(
             product => {
              this.addProduct(product);
         });
@@ -195,7 +196,10 @@ export class CartProductService {
     {
         console.log("CartProductService::removeProduct, id="+productId);
 
-      this.productService.delete(productId);
+      this.productPromiseService.delete(productId)
+      .then(() => this.productitems = this.productitems.filter(t => t.id !== productId))
+      .catch(err => console.log(err));
+
     }
 
     makeOrder()

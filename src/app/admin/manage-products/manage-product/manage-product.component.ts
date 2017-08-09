@@ -1,4 +1,4 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter  } from '@angular/core';
 
 import { Product } from './../../../models/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,6 +15,7 @@ import { ConfirmDialogService } from './../../../services/confirm-dialog.service
 export class ManageProductComponent implements OnInit {
 
 @Input() product: Product;
+@Output() onDelete = new EventEmitter<Product>();
 
   constructor(   private router: Router,
     private route: ActivatedRoute,
@@ -39,12 +40,13 @@ private cartProductService: CartProductService,
     return this.cartProductService.canRemoveProduct(this.product.id);
   }
 
-  deleteProduct() {
+
+  deleteProduct()
+  {
     if (this.confirmDialogService.confirm("delete product "+this.product.name+" ?"))
     {
-      this.cartProductService.removeProduct(this.product.id);
+      this.onDelete.emit(this.product);
+     // this.cartProductService.removeProduct(this.product.id);
     }
   }
-
-  
 }
