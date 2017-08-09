@@ -1,23 +1,10 @@
-<!--<div #topelement> 
-<div>id: {{CartItem.cartItem.id}}</div>
-<div>name: {{CartItem.product.name}}</div>
-<div [ngClass]="{clearance : CartItem.onClearance} ">price: {{CartItem.product.price | currency:'EUR':true:'2.1-1'}} <span style="color:green">Currency formatted with pipe</span></div>
-<div>quantity: <input value="{{CartItem.cartItem.quantity}}" placeholder="quantity" #quantity/></div>
-</div> 
-
-<div><button (click)='updateQuantity({"quantity": quantity.value}); $event.stopPropagation()'>Update quantity</button></div>
-<div><button (click)='deleteItem(CartItem.cartItem.id); $event.stopPropagation()'>Delete</button></div>
- -->
-
-<div class="panel panel-default" #topelement>
-	<!--div class="panel-heading">Product</div-->
+<div class="panel panel-default">
 	<div class="panel-body">
 		<ul>
 			<li>id: {{CartItem.cartItem.id}}</li>
             <li>Name: {{CartItem.product.name}}</li> 
-            <li [ngClass]="{clearance : CartItem.onClearance} ">price: {{CartItem.product.price | currency:'EUR':true:'2.1-1'}} <span style="color:green">Currency formatted with pipe</span></li>
+            <li [ngClass]="{clearance : CartItem.onClearance} ">price: {{CartItem.product.price | currency:'EUR':true:'2.1-1'}} </li>
 			<li>Quantity:  <input value="{{CartItem.cartItem.quantity}}" placeholder="quantity" #quantity/>Available:{{CartItem.product.quantity}}</li>
-			<!--li>price: {{product.price | currency:'USD':true:'2.1-1'}}</li-->
 		</ul>
 		<button (click)='updateQuantity({"quantity": quantity.value}); $event.stopPropagation()'>Update quantity</button>
 		<button (click)='deleteItem(); $event.stopPropagation()'>Delete</button>

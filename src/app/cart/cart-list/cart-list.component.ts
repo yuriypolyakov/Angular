@@ -1,10 +1,12 @@
 import { Component, OnInit,EventEmitter, Input, Output, ViewChild,ElementRef } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+
+
 import { CartItem,ICartItem } from '../models/cart.item.model';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CartService, Info } from '../cart.service';
 import { ClearancePipe } from './../pipes/clearance.pipe';
-import { ActivatedRoute, Params } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 import { CartProductItem } from '../../models/cart-product.model';
 import { CartProductService } from './../../services/cart-product.service';
 
@@ -15,22 +17,6 @@ import { CartProductService } from './../../services/cart-product.service';
   providers: [ClearancePipe]
 })
 export class CartListComponent implements OnInit {
-
-  @ViewChild('label') labelField: ElementRef;
-  @ViewChild(CartItemComponent) child: CartItemComponent;
-  @ViewChild('child') childComp: ElementRef;
-
-
-  ngAfterViewInit() {
-
-    if (this.info.total>0)
-      {
-        (<HTMLLabelElement>this.labelField.nativeElement).textContent = 'loaded';
-      }
-    //this.child.onClick();
-
-    console.log(this.childComp);
-  }
 
   items: Array<CartProductItem> = [];
   clearanceList : Array<ICartItem>;

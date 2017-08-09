@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent, AdminDashboardComponent, ManageProductsComponent,ProductFormComponent,ManageProductComponent } from '.';
-//import { ProductListComponent } from './../product/product-list/product-list.component';
-//import { ProductFormComponent } from './../product/product-form/product-form.component';
 import { ProductResolveGuard }   from './../guards/product-resolve.guard';
 import { AuthGuard } from './../guards/auth.guard';
 

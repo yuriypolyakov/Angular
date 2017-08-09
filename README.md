@@ -1,4 +1,12 @@
 
+В .angular-cli.json указан бутстреп, а в зависимостях его нет, ругается при компиляции
+
+https://stackoverflow.com/questions/37649164/how-to-add-bootstrap-to-an-angular-cli-project
+
+VZhyrytskiy commented 11 hours ago
+Когда много импортов, я бы рекомендовал разбивать их на секции по типам, а дальше, возможно, даже сортировал бы по алфавиту. Так проще и быстрее просмотреть их.
+
+
 Please open About page!
 ===================================
 

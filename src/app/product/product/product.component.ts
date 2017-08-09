@@ -3,9 +3,8 @@ import { Component, OnInit, Input  } from '@angular/core';
 import { Product } from './../../models/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from './../../cart/cart.service';
-import { CartProductService } from './../../services/cart-product.service';
-import { ProductAddedService } from './../../services/product-added.service';
-import { ConfirmDialogService } from './../../services/confirm-dialog.service';
+import { CartProductService,ProductAddedService,ConfirmDialogService } from './../../services/';
+
 
 @Component({
   selector: 'product',

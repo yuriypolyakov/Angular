@@ -17,18 +17,22 @@ export class CartService {
 
     info: Info = { total : 0, totalSum :0, updated : new Date() };
 
+      // Observable navItem source
+    private _navItemSource = new BehaviorSubject<number>(0);
+    // Observable navItem stream
+    navItem$ = this._navItemSource.asObservable();
+    // service command
+    changeNav(number) {
+        this._navItemSource.next(number);
+    }
+
+
     constructor(
         private localCartService: LocalCartService) {
         this.idx=1;
         
         this.cartItems =[];
         this.loadFromStorage();
-        /*new CartItem( this.idx++, 1,1,false),
-        new CartItem(this.idx++,2,2,true),
-        new CartItem(this.idx++,3,4,true)
-        ];*/
-
-        //this.updateTotals();
     }
 
     private loadFromStorage()
@@ -36,7 +40,7 @@ export class CartService {
           let storedItems =  this.localCartService.getItem("cartItems");
 
           if (storedItems == null) return;
-        console.log("loadFromStorage, "+storedItems);
+                console.log("loadFromStorage, "+storedItems);
             this.cartItems = storedItems;
             storedItems.forEach(element => {
             //console.log("loadFromStorage element, id ="+element.id);
@@ -48,15 +52,7 @@ export class CartService {
     {
          this.localCartService.setItem("cartItems",this.cartItems.filter(s=>s.orderId==null));
     }
-    // Observable navItem source
-  private _navItemSource = new BehaviorSubject<number>(0);
-  // Observable navItem stream
-  navItem$ = this._navItemSource.asObservable();
-  // service command
-  changeNav(number) {
-    this._navItemSource.next(number);
-  }
-
+  
     getCartItems(): Array<ICartItem> {
         return this.cartItems;
     }
