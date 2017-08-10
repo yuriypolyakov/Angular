@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ProductComponent, ProductService } from '.';
+import { CartProductService } from './../services';
 import { ProductsRoutingModule, productRouterComponents } from './products.routing.module';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProductsRoutingModule, productRouterComponents } from './products.routi
   declarations: [ productRouterComponents,    ProductComponent,
   ],
    providers: [
-    ProductService
+    ProductService,
+    CartProductService
     ],
 })
 export class ProductModule { } 

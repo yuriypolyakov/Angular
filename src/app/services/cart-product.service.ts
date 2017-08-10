@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
-import { CartProductItem } from './../models/cart-product.model';
-import { Product } from './../models/product.model';
+import { Product,CartProductItem } from './../models/';
 import { ProductService } from './../product/services/product.service';
 import { CartService,Info } from './../cart/cart.service';
 import { OrdersService } from './../orders/services/orders.service';

@@ -38,7 +38,7 @@ const routes: Routes = [
   }
 ];
 
-export let adminRouterComponents = [AdminComponent, AdminDashboardComponent, ManageProductsComponent, ProductFormComponent,ManageProductComponent/*ProductListComponent,ProductFormComponent*/];
+export let adminRouterComponents = [AdminComponent, AdminDashboardComponent, ManageProductsComponent, ProductFormComponent,ManageProductComponent];
 
 @NgModule({
   imports: [
