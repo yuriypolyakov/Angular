@@ -1,26 +1,9 @@
 {
-  "tasks": [
-    {
-      "id": 1,
-      "action": "Estimate1111",
-      "priority": 1,
-      "estHours": 8,
-      "actHours": 0,
-      "done": true
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "firstName": "Anna",
-      "lastName": "Petrova"
-    }
-  ],
-  "products": [
+   "products": [
     {
       "id": 1,
       "name": "Product1",
-      "quantity": 45,
+      "quantity": 41,
       "price": "100"
     },
     {
@@ -46,6 +29,14 @@
       "name": "Product5",
       "quantity": "0",
       "price": "200"
+    }
+  ],
+  "orders": [
+    { "id": 1,
+      "price": 500,
+      "dateOrdered": "10/10/17",
+      "status" : 1,
+      "cartItems" : [1,2]
     }
   ]
 }

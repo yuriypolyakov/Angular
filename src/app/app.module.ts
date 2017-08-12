@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule,JsonpModule } from '@angular/http';
 import { RouterModule,Router } from '@angular/router';
-import { AppRoutingModule,appRouterComponents  } from './app.routing.module';
 
+import { AppRoutingModule,appRouterComponents  } from './app.routing.module';
 import { AppComponent } from './app.component';
-import { ProductModule } from './product/product.module';
+import { AuthGuard } from './guards/auth.guard';
 import { ClickDirective } from './directives/click.directive';
 import { CartProductService,ProductAddedService,ConfirmDialogService,AuthService,LocalCartService } from './services/';
-import { AuthGuard } from './guards/auth.guard';
 import { OrdersModule } from './orders/orders.module';
+import { ProductModule } from './product/product.module';
 
 @NgModule({
   declarations: [

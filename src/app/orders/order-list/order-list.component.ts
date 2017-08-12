@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Order } from './../../models/order.model';
-import { OrdersService } from './../services/orders.service';
+import { OrdersService,OrderObservableService } from './../';
 
 @Component({
   templateUrl: 'order-list.component.html',
@@ -9,13 +10,18 @@ import { OrdersService } from './../services/orders.service';
 })
 export class OrderListComponent implements OnInit {
   orders: Array<Order>= [];
+  errorMessage: string;
+  private sub: Subscription[] = [];
+
 
   constructor(
-    private orderService: OrdersService) { }
+    private orderService: OrdersService
+    ,    private orderObservableService: OrderObservableService
+  ) { }
 
   ngOnInit() {
     
-    this.orderService.getOrders()
+    /*this.orderService.getOrders()
       .then(orders => 
         {
           //console.log("orderService.getOrders() = "+orders);
@@ -25,7 +31,14 @@ export class OrderListComponent implements OnInit {
       )
       .catch((err) => console.log(err));
 
-      
+      */
+          const sub = this.orderObservableService.getOrders()
+      .subscribe(
+        users => this.orders = users,
+        error => this.errorMessage = <any>error
+      );
+    this.sub.push(sub);
+
   }
 
   completeTask(order: Order): void {

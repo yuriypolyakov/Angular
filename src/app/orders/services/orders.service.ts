@@ -15,8 +15,6 @@ export class OrdersService {
 
   constructor() {
         this.idx=1;
-        
-           
     }
 
   getOrders(): Promise<Order[]> {

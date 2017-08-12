@@ -1,12 +1,4 @@
 
-В .angular-cli.json указан бутстреп, а в зависимостях его нет, ругается при компиляции
-
-https://stackoverflow.com/questions/37649164/how-to-add-bootstrap-to-an-angular-cli-project
-
-VZhyrytskiy commented 11 hours ago
-Когда много импортов, я бы рекомендовал разбивать их на секции по типам, а дальше, возможно, даже сортировал бы по алфавиту. Так проще и быстрее просмотреть их.
-
-
 json-server --watch db.json
 
 Please open About page!
@@ -16,6 +8,40 @@ Please open About page!
 1. Реализуйте бекэнд для Вашего проекта, используя, например, json-server
 2. Создайте сервис для работы с Http.
 3. Реализуйте часть методов по схеме Promise, а часть по схеме Observable.
+
+
+Promise
+
+A Promise handles a single event when an async operation completes or fails.
+
+Note: There are Promise libraries out there that support cancellation, but ES6 Promise doesn't so far.
+
+Observable
+
+An Observable is like a Stream (in many languages) and allows to pass zero or more events where the callback is called for each event.
+
+Often Observable is preferred over Promise because it provides the features of Promise and more. With Observable it doesn't matter if you want to handle 0, 1, or multiple events. You can utilize the same API in each case.
+
+Observable also has the advantage over Promise to be cancelable. If the result of an HTTP request to a server or some other expensive async operation isn't needed anymore, the Subscription of an Observable allows to cancel the subscription, while a Promise will eventually call the success or failed callback even when you don't need the notification or the result it provides anymore.
+
+Observable provides operators like map, forEach, reduce, ... similar to an array
+
+There are also powerful operators like retry(), or replay(), ... that are often quite handy.
+
+
+Promises vs Observables
+
+promise:
+  returns a single value
+  not cancellable
+observable
+  works with multiple values over time
+  cancellable
+  supports map, filter, reduce and similar operators
+  proposed feature for ES 2016
+  use Reactive Extensions (RxJS)
+  an array whose items arrive asynchronously over time
+  finally handling
 
 # MyApp
 
