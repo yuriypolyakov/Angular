@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router  } from '@angular/router';
 
 import { Product } from './../../../models/product.model';
-import { ProductService,ProductPromiseService } from './../../../product/';
+import { ProductPromiseService } from './../../../product/';
 import 'rxjs/add/operator/switchMap';
 //import { DialogService }  from './../../services/dialog.service';
 
@@ -17,7 +17,7 @@ export class ProductFormComponent implements OnInit {
   oldUser: Product;
 
   constructor(
-    private productService: ProductService,
+    //private productService: ProductService,
     private productPromiseService: ProductPromiseService,
     private route: ActivatedRoute,
     private router: Router,
@@ -53,9 +53,11 @@ export class ProductFormComponent implements OnInit {
      if (product.id) {
       //this.productService.updateProduct(product);
        this.oldUser = this.product;
-      this.productPromiseService.updateProduct(product).then( () => this.goBack() );
-     
-      //this.router.navigate(['/admin/products', {id: product.id}]);
+      this.productPromiseService.updateProduct(product)
+      .then(
+        () => this.router.navigate(['/admin/products', {id: product.id}]) 
+      );
+
     } 
     else {
       //this.productPromiseService.addProduct(product);

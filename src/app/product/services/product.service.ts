@@ -13,7 +13,7 @@ const productList = [
 const productListPromise = Promise.resolve(productList);
    
 @Injectable()
-export class ProductService {
+export class ProductService2 {
 
   products : Array<Product> ;
 

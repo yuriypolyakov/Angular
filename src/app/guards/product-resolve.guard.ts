@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Product } from './../models/product.model';
-import { ProductService } from './../product/services/product.service';
+import { ProductPromiseService } from './../product/';
 
 @Injectable()
 export class ProductResolveGuard implements Resolve<Product> {
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductPromiseService, 
     private router: Router
   ) {}
   
   resolve(route: ActivatedRouteSnapshot): Promise<Product> {
     
     const id = +route.params['id'];
-    console.log("ProductResolveGuard:resolve, id="+id);
-
+    //console.log("ProductResolveGuard:resolve, id="+id);
+    if (id && id>0) 
+    {
     return this.productService.getProduct(id).then(user => {
       // todo: check maybe -1 if id not found
       if (user) {
@@ -29,5 +30,6 @@ export class ProductResolveGuard implements Resolve<Product> {
         return null;
       }
     });
+    }
   }
 }

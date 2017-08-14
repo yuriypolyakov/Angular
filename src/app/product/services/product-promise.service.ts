@@ -13,6 +13,7 @@ export class ProductPromiseService {
   ) {}
 
   getProducts(): Promise<Product[]> {
+    console.log("ProductPromiseService::getProducts");
     return this.http.get(this.productsUrl)
             .toPromise()
             .then( response => <Product[]>response.json())

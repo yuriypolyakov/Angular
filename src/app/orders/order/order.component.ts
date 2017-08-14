@@ -9,8 +9,12 @@ import { Order } from './../../models/order.model';
 })
 export class OrderComponent {
   @Input()  order: Order;
+  @Output() onDelete = new EventEmitter<Order>();
  
   constructor() { }
 
- 
+  deleteOrder()
+  {
+   this.onDelete.emit(this.order);
+  }
 }

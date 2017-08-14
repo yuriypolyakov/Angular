@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
   ) {}
 
   private checkLogin(url: string): boolean {
+    console.log("AuthGuard::checklogin");
     if (this.authService.isLoggedIn) { return true; }
 
     // Store the attempted URL for redirecting

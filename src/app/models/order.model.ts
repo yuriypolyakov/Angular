@@ -6,14 +6,26 @@ export enum OrderStatus {
     cancelled 
 }
 
+
+export class OrderItem {
+ 
+  constructor(
+   public id: number,
+   public productId: number,
+   public quantity: number,
+    //public price: number=0,
+   ) {
+  }
+}
+
 export class Order {
  
   constructor(
-    public id: number,
+    public id: string,
     public price: number,
     public dateOrdered : Date,
     public status : OrderStatus,
-    public cartItems : Array<number>
+    public cartItems : Array<OrderItem>
   ) {
   }
 }

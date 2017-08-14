@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Order,OrderStatus } from './../../models/order.model';
+import { OrderItem, Order,OrderStatus } from './../../models/order.model';
 
 const orderList = [
   //new Order(1,2,new Date(),OrderStatus.created,[])
@@ -9,7 +9,7 @@ const orderList = [
 const orderListPromise = Promise.resolve(orderList);
 
 @Injectable()
-export class OrdersService {
+export class OrdersService2 {
 
   idx : number;
 
@@ -22,19 +22,19 @@ export class OrdersService {
     return orderListPromise;
   }
 
-  getOrder(id: number | string): Promise<Order> {
+  /*getOrder(id: number | string): Promise<Order> {
     return this.getOrders()
       .then(orders => orders.find(order => order.id === +id))
       .catch(() => Promise.reject('Error in getOrder method'));;
   }
 
-  addOrder(cartItems : Array<number>): number {
+  addOrder(cartItems : Array<OrderItem>): number {
     orderList.push(
       new Order(this.idx++,2,new Date(),OrderStatus.created,cartItems)
     );
   
     return this.idx;
-  }
+  }*/
 
   updateOrder(task: Order): void {
     let i = -1;

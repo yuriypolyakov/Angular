@@ -1,6 +1,7 @@
 <order 
   *ngFor="let order of orders" 
   [order]="order"
+  (onDelete)="deleteOrder($event)">
   >
 </order>
 <div *ngIf="orders.length==0">No orders</div>

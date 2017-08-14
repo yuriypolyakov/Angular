@@ -98,7 +98,8 @@ export class CartService {
 
     public moveCartItemsToOrder(orderId:number) 
     {
-       this.cartItems.forEach(c => c.orderId=orderId);
+       this.cartItems.forEach(c => 
+            this.delete(c.id));
        this.saveItemsToStorage();
     }
 

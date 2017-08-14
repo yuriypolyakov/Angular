@@ -3,10 +3,10 @@ import {Subscription} from 'rxjs/Subscription';
 
 import { CartProductItem } from './../models/cart-product.model';
 import { Product } from './../models/product.model';
-import { ProductService } from './../product/services/product.service';
+//import { ProductService } from './../product/services/product.service';
 import { ProductPromiseService } from './../product/services/product-promise.service';
 import { CartService,Info } from './../cart/cart.service';
-import { OrdersService } from './../orders/services/orders.service';
+import { OrderItem,OrderObservableService } from './../orders/';
 import { LocalCartService } from '.';
 
 
@@ -28,7 +28,7 @@ export class CartProductService {
     constructor(
         private cartService: CartService,
         //private productService: ProductService,
-        private ordersService: OrdersService,
+        private ordersService: OrderObservableService,
         private localCartService: LocalCartService,
         private productPromiseService: ProductPromiseService,
         ) {
@@ -38,10 +38,10 @@ export class CartProductService {
              this.productPromiseService.getProduct(item).then(
                 product => {
                     if (product)
-                        {
+                     {
                       product.quantity--;
                     this.productPromiseService.updateProduct(product);
-                        }
+                     }
                 });
 
            
@@ -206,14 +206,19 @@ export class CartProductService {
     makeOrder()
     {
         console.log("CartProductService::makeOrder");
-        let cartItems : Array<number> = [];
+        let orderItems : Array<OrderItem> = [];
         
+        let idx=1;
         this.items.forEach( s => 
         {
-            cartItems.push(s.cartItem.id);
+            orderItems.push(new OrderItem(idx++,s.cartItem.productId,s.cartItem.quantity));
         } );
-        let orderId =  this.ordersService.addOrder(cartItems);
-        this.cartService.moveCartItemsToOrder(orderId);
+        let orderId =  this.ordersService.addOrder(orderItems);
+        this.items.forEach( s => 
+        {
+            this.cartService.delete(s.cartItem.id);
+        } );
+        
         this.fillItems();
         this.updateTotals();
     }

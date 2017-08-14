@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Product } from './../../models/product.model';
-import { ProductService,ProductPromiseService  } from './../';
+import { ProductPromiseService  } from './../';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit {
 products: Array<Product>;
 
   constructor(
-    private productService: ProductService,
+    //private productService: ProductService,
     private productPromiseService: ProductPromiseService
   ) { }
 

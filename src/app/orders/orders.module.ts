@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OrdersService,OrderObservableService,OrderComponent,OrderListComponent} from '.';
+import { OrderObservableService,OrderComponent,OrderListComponent} from '.';
 import { OrdersRoutingModule } from './orders.routing.module';
 
 @NgModule({
@@ -11,7 +11,6 @@ import { OrdersRoutingModule } from './orders.routing.module';
   ],
   declarations: [ OrderListComponent, OrderComponent],
   providers: [
-    OrdersService,
     OrderObservableService
   ]
 

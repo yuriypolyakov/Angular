@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Order } from './../../models/order.model';
-import { OrdersService,OrderObservableService } from './../';
+import { OrderObservableService } from './../';
 
 @Component({
   templateUrl: 'order-list.component.html',
@@ -15,8 +15,8 @@ export class OrderListComponent implements OnInit {
 
 
   constructor(
-    private orderService: OrdersService
-    ,    private orderObservableService: OrderObservableService
+    //private orderService: OrdersService
+       private orderObservableService: OrderObservableService
   ) { }
 
   ngOnInit() {
@@ -41,7 +41,17 @@ export class OrderListComponent implements OnInit {
 
   }
 
-  completeTask(order: Order): void {
-    this.orderService.completeOrder(order);
+  ngOnDestroy() {
+    this.sub.forEach(sub => sub.unsubscribe());
+}
+
+
+deleteOrder(order: Order) {
+    this.orderObservableService.deleteOrder(order)
+	.subscribe(
+      	   () => this.orders = this.orders.filter(u => u !== order),
+      	   err => console.log(err)
+       );
   }
+
 }

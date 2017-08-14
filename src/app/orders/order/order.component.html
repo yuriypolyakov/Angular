@@ -1,12 +1,20 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Order</div>
-	<div class="panel-body">
-		<ul>
-      <li>id: {{order.id}}</li>
-			<li>status: {{order.status}}</li>
-			<li>number of items: {{order.cartItems.length}}</li>
-			<li>order date: {{order.dateOrdered}}</li>
-			
-		</ul>
+		<div>
+			status: {{order.status}}, order date: {{order.dateOrdered}}
 		</div>
+	<div class="panel-body">
+		 <ul *ngFor="let it of order.cartItems">
+      <li>product: {{it.productId}}
+			</li>
+			 <li>quantity: {{it.quantity}}
+      </li>
+    </ul>
+      
+	</div>
+	<button class="btn btn-danger btn-sm"
+			(click)="deleteOrder()">
+			Delete
+	</button>
+
 </div>
