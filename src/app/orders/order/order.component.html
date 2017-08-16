@@ -3,6 +3,7 @@
 		<div>
 			status: {{order.status}}, order date: {{order.dateOrdered}}
 		</div>
+		<div class="panel-heading">Order Items</div>
 	<div class="panel-body">
 		 <ul *ngFor="let it of order.cartItems">
       <li>product: {{it.productId}}
